@@ -1,12 +1,10 @@
-from pynamodb.models import Model
-
-from financier.shared.utils.naming import get_app_table_name
+from enum import Enum
 
 from pynamodb.attributes import UnicodeAttribute, UTCDateTimeAttribute
+from pynamodb.models import Model
 
 from financier.shared.config import DEFAULT_SYSTEM_ID
-
-from enum import Enum
+from financier.shared.utils.naming import get_app_table_name
 
 
 class ItemTypes(Enum):

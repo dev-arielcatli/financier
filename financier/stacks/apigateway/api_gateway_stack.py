@@ -1,20 +1,22 @@
+from http import HTTPMethod
+
 import aws_cdk as cdk
+from aws_cdk import aws_apigateway as _apigateway
 from constructs import Construct
 
-from aws_cdk import (
-    aws_apigateway as _apigateway,
-)
-
-from financier.shared.utils.naming import get_api_name, get_deployment_name, get_stage_name
 from financier.shared.models.features import Feature
+from financier.shared.utils.naming import (
+    get_api_name,
+    get_deployment_name,
+    get_stage_name,
+)
 from financier.stacks.functions.functions_stack import FunctionsStack
 
 
-from http import HTTPMethod
-
-
 class APIGatewayStack(cdk.Stack):
-    def __init__(self, scope: Construct, id: str, functions_stack: FunctionsStack, **kwargs) -> None:
+    def __init__(
+        self, scope: Construct, id: str, functions_stack: FunctionsStack, **kwargs
+    ) -> None:
         super().__init__(scope, id, **kwargs)
 
         api_name = get_api_name(Feature.DEFAULT.value)
@@ -33,21 +35,20 @@ class APIGatewayStack(cdk.Stack):
         )
 
         # /expense
-        expense_resource = self.root_api.root.add_resource(
-            Feature.EXPENSE.value)
+        expense_resource = self.root_api.root.add_resource(Feature.EXPENSE.value)
         expense_resource.add_method(
             HTTPMethod.GET,
             _apigateway.LambdaIntegration(
                 functions_stack.expense_list_function,
                 proxy=False,
-            )
+            ),
         )
         expense_resource.add_method(
             HTTPMethod.POST,
             _apigateway.LambdaIntegration(
                 functions_stack.expense_create_function,
                 proxy=False,
-            )
+            ),
         )
 
         # /expense/{id}
@@ -57,21 +58,21 @@ class APIGatewayStack(cdk.Stack):
             _apigateway.LambdaIntegration(
                 functions_stack.expense_get_function,
                 proxy=False,
-            )
+            ),
         )
         identified_expense_resource.add_method(
             HTTPMethod.PUT,
             _apigateway.LambdaIntegration(
                 functions_stack.expense_update_function,
                 proxy=False,
-            )
+            ),
         )
         identified_expense_resource.add_method(
             HTTPMethod.DELETE,
             _apigateway.LambdaIntegration(
                 functions_stack.expense_delete_function,
                 proxy=False,
-            )
+            ),
         )
 
         # DEPLOYMENTS
@@ -81,5 +82,5 @@ class APIGatewayStack(cdk.Stack):
             get_deployment_name(),
             stage_name=stage_name,
             retain_deployments=True,
-            api=self.root_api
+            api=self.root_api,
         )

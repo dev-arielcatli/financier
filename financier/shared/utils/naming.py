@@ -1,4 +1,4 @@
-from financier.shared.config import APP_NAME, STAGE, TABLE_NAME_MAIN, FUNCTION_CODE_PATH
+from financier.shared.config import APP_NAME, FUNCTION_CODE_PATH, STAGE, TABLE_NAME_MAIN
 from financier.shared.models.actions import Action
 from financier.shared.models.features import Feature
 
@@ -41,11 +41,24 @@ def get_api_stack_name() -> str:
 
 
 def get_deployment_name() -> str:
-    return compose([APP_NAME, "deployment", STAGE,])
+    return compose(
+        [
+            APP_NAME,
+            "deployment",
+            STAGE,
+        ]
+    )
 
 
 def get_stage_name() -> str:
-    return compose([APP_NAME, "stage", STAGE,])
+    return compose(
+        [
+            APP_NAME,
+            "stage",
+            STAGE,
+        ]
+    )
+
 
 # STACKS
 

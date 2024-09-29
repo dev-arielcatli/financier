@@ -1,11 +1,8 @@
 import aws_cdk as cdk
 from aws_cdk import aws_dynamodb as _ddb
-
 from constructs import Construct
 
-
 from financier.shared.models.base import ItemModel
-
 from financier.shared.utils.naming import get_app_table_name
 
 
