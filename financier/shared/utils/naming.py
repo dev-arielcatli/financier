@@ -6,6 +6,7 @@ from financier.shared.utils.features import Feature
 def compose(values: list[str | None]) -> str:
     return "-".join([value or "" for value in values])
 
+
 # FUNCTIONS
 
 
@@ -27,11 +28,13 @@ def get_table_name(name: str) -> str:
 def get_app_table_name() -> str:
     return compose([APP_NAME, STAGE, "table", TABLE_NAME_MAIN])
 
+
 # API
 
 
 def get_api_name(name: str) -> str:
     return compose([APP_NAME, STAGE, "api", name])
+
 
 # STACKS
 
