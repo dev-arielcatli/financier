@@ -16,7 +16,7 @@ expense = ExpenseModel(
     categories=["food", "snack"],
     quantity=2,
     unit="kg",
-    unitPrice=270
+    unitPrice=270,
 )
 
 expense.save()

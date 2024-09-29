@@ -2,9 +2,7 @@ from pynamodb.models import Model
 
 from financier.shared.utils.naming import get_app_table_name
 
-from pynamodb.attributes import (
-    UnicodeAttribute, UTCDateTimeAttribute
-)
+from pynamodb.attributes import UnicodeAttribute, UTCDateTimeAttribute
 
 from financier.shared.config import DEFAULT_SYSTEM_ID
 
@@ -12,9 +10,9 @@ from enum import Enum
 
 
 class ItemTypes(Enum):
-    EXPENSE = 'expense'
-    INCOME = 'income'
-    DEFAULT = 'default'
+    EXPENSE = "expense"
+    INCOME = "income"
+    DEFAULT = "default"
 
 
 class ItemModel(Model):

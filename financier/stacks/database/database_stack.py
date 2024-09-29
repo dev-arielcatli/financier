@@ -1,7 +1,5 @@
 import aws_cdk as cdk
-from aws_cdk import (
-    aws_dynamodb as _ddb
-)
+from aws_cdk import aws_dynamodb as _ddb
 
 from constructs import Construct
 
@@ -16,8 +14,10 @@ class DatabaseStack(cdk.Stack):
         super().__init__(scope, id, **kwargs)
 
         self.table = _ddb.TableV2(
-            self, get_app_table_name(),
+            self,
+            get_app_table_name(),
             partition_key=_ddb.Attribute(
-                name=ItemModel.userId.attr_name, type=_ddb.AttributeType.STRING),
+                name=ItemModel.userId.attr_name, type=_ddb.AttributeType.STRING
+            ),
             table_name=get_app_table_name(),
         )
