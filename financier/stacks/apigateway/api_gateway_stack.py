@@ -31,7 +31,6 @@ class APIGatewayStack(cdk.Stack):
                 allow_origins=_apigateway.Cors.ALL_ORIGINS,
                 allow_methods=_apigateway.Cors.ALL_METHODS,
             ),
-            proxy=False,
         )
 
         # /expense
@@ -40,14 +39,12 @@ class APIGatewayStack(cdk.Stack):
             HTTPMethod.GET,
             _apigateway.LambdaIntegration(
                 functions_stack.expense_list_function,
-                proxy=False,
             ),
         )
         expense_resource.add_method(
             HTTPMethod.POST,
             _apigateway.LambdaIntegration(
                 functions_stack.expense_create_function,
-                proxy=False,
             ),
         )
 
@@ -57,21 +54,18 @@ class APIGatewayStack(cdk.Stack):
             HTTPMethod.GET,
             _apigateway.LambdaIntegration(
                 functions_stack.expense_get_function,
-                proxy=False,
             ),
         )
         identified_expense_resource.add_method(
             HTTPMethod.PUT,
             _apigateway.LambdaIntegration(
                 functions_stack.expense_update_function,
-                proxy=False,
             ),
         )
         identified_expense_resource.add_method(
             HTTPMethod.DELETE,
             _apigateway.LambdaIntegration(
                 functions_stack.expense_delete_function,
-                proxy=False,
             ),
         )
 
