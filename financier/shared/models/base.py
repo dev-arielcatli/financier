@@ -23,6 +23,7 @@ class ItemModel(Model):
 
     userId = UnicodeAttribute(hash_key=True, default=DEFAULT_SYSTEM_ID)
     createdAt = UTCDateTimeAttribute(null=False, range_key=True)
-    updatedAt = UTCDateTimeAttribute(null=True)
-
     type = UnicodeAttribute(null=False, default=ItemTypes.DEFAULT.value)
+
+    updatedAt = UTCDateTimeAttribute(null=True)
+    itemId = UnicodeAttribute(null=False)
