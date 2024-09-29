@@ -12,3 +12,7 @@ TABLE_NAME_MAIN = "main"
 # DEFAULTS
 DEFAULT_SYSTEM_ID = "system"
 DEFAULT_UNIT = "unit"
+
+# INFRASTRUCTURE
+FUNCTION_CODE_ROOT_PATH = "financier"
+FUNCTION_CODE_PATH = f"stacks.functions.handlers"
