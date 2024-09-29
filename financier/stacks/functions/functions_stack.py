@@ -6,8 +6,8 @@ from aws_cdk import (
 )
 
 from financier.shared.utils.naming import get_function_name, get_function_handler_path
-from financier.shared.utils.features import Feature
-from financier.shared.utils.actions import Action
+from financier.shared.models.features import Feature
+from financier.shared.models.actions import Action
 from financier.shared.config import FUNCTION_CODE_ROOT_PATH
 
 
