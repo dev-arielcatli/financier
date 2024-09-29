@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "financier"
+version = "0.1.0"
+description = ""
+authors = ["Ariel Catli <dev.arielcatli@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+aws-cdk-lib = "2.148.0"
+constructs = ">=10.0.0,<11.0.0"
+python-dotenv = "^1.0.1"
+boto3 = "^1.35.29"
+boto3-stubs = "^1.35.29"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,58 +1,106 @@
+# Financier
 
-# Welcome to your CDK Python project!
+AI-powered personal finance management API
 
-This is a blank project for CDK development with Python.
+## ⚠️ Work in progress
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+As much as I love to work on this project fulltime, I still have a job that I love.
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
+## 🧠 What is it?
 
-To manually create a virtualenv on MacOS and Linux:
+Basically a glorified bookkeeper, financial coach, and financial manager.
+I wanted to leverage the use of OpenAI models to create an assistant that will:
 
-```
-$ python -m venv .venv
-```
+- keep track of my expenses
+- generate reports
+- remind me of a money-related event
+- make me feel good about my financial health (or not)
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+### Features
 
-```
-$ source .venv/bin/activate
-```
+1. 📃 Create, list, read, update, delete income and expense items.
+2. 📸 Upload a photo of a receipt and let the assistant book it for you.
+3. 📈 Generate daily, monthly, yearly reports of your finances.
+4. 💪🏽Set budgets (daily and weekly).
+5. 📨 Receive emails about alerts and notifications.
+6. ⛰️ Set financial goals.
+7. 👨🏽 Ask the assistant about your finances.
 
-If you are a Windows platform, you would activate the virtualenv like this:
+## ⚙️ Installation
 
-```
-% .venv\Scripts\activate.bat
-```
+The project is managed with `poetry`.
+Make sure to install `poetry` with `pipx`!
 
-Once the virtualenv is activated, you can install the required dependencies.
+1. Create a `.venv` folder in root. I just do this so `poetry` installs the new environment to a rather familiar place I know.
+1. Install the requirements,
+   ```
+   poetry install
+   ```
+1. Create an `.env` file with the following contents,
+   ```
+   STAGE=<stage>
+   APP_NAME=<whatever name you want>
+   ```
+1. Use your CDK to deploy the app! Don't forget to bootstrap you dirty little fish.
 
-```
-$ pip install -r requirements.txt
-```
+## 🛣️ Roadmap
 
-At this point you can now synthesize the CloudFormation template for this code.
+### Phase 1
 
-```
-$ cdk synth
-```
+Initial setup.
 
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
+- ✅ Initialize project structure
+- ✅ Setup project
+- Setup tests
 
-## Useful commands
+### Phase 2
 
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
+Simple proof of concept for data management.
 
-Enjoy!
+- Data modelling
+  - Expense
+  - Income
+- DynamoDB setup
+- API Gateway setup
+  - Create
+  - Read
+  - Update
+  - Delete
+- Lambda functions setup
+  - Create
+  - Read
+  - Update
+  - Delete
+
+### Phase 3
+
+Securing our application.
+
+- Stardardize IAM roles
+- Cognito setup
+  - Identity pools
+- API Gateway authorizer
+
+### Phase 4
+
+Setup the assistant
+
+- Write OpenAI model code for the assistant.
+- Interface for the Financier API and the assistant API.
+
+### Phase 5
+
+Assistant features
+
+- Tools for the assistant
+  - Reports generator
+  - Chat
+  - Photo manager
+
+### Phase 6
+
+More assistant features
+
+- Budget
+- Alarms
+- Goals
