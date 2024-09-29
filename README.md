@@ -40,6 +40,7 @@ Make sure to install `poetry` with `pipx`!
    ```
    STAGE=<stage>
    APP_NAME=<whatever name you want>
+   AWS_DEFAULT_REGION=<aws region>
    ```
 1. Use your CDK to deploy the app! Don't forget to bootstrap you dirty little fish.
 

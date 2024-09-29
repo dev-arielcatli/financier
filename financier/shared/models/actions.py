@@ -8,3 +8,4 @@ class Action(Enum):
     READ = "read"
     DELETE = "delete"
     LIST = "list"
+    MAIN = "main"

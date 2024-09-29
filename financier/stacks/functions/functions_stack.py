@@ -16,6 +16,24 @@ class FunctionsStack(cdk.Stack):
         super().__init__(scope, id, **kwargs)
 
         # Expense Functions
+        # MAIN EXPENSE
+        expense_main_function_id = get_function_name(
+            name=Feature.EXPENSE.value,
+            feature=Feature.EXPENSE,
+            action=Action.MAIN,
+        )
+        self.expense_main_function = _lambda.Function(
+            self,
+            expense_main_function_id,
+            function_name=expense_main_function_id,
+            runtime=_lambda.Runtime.PYTHON_3_12,
+            code=_lambda.Code.from_asset(FUNCTION_CODE_ROOT_PATH),
+            handler=get_function_handler_path(
+                feature=Feature.EXPENSE,
+                action=Action.MAIN,
+            ),
+        )
+
         # GET EXPENSE
         expense_get_function_id = get_function_name(
             name=Feature.EXPENSE.value,

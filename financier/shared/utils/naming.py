@@ -29,12 +29,23 @@ def get_app_table_name() -> str:
     return compose([APP_NAME, STAGE, "table", TABLE_NAME_MAIN])
 
 
-# API
+# API GATEWAY
 
 
 def get_api_name(name: str) -> str:
     return compose([APP_NAME, STAGE, "api", name])
 
+
+def get_api_stack_name() -> str:
+    return get_stack_name("apigateway")
+
+
+def get_deployment_name() -> str:
+    return compose([APP_NAME, "deployment", STAGE,])
+
+
+def get_stage_name() -> str:
+    return compose([APP_NAME, "stage", STAGE,])
 
 # STACKS
 
@@ -49,3 +60,7 @@ def get_database_stack_name() -> str:
 
 def get_functions_stack_name() -> str:
     return get_stack_name("functions")
+
+
+def get_api_gateway_stack_name() -> str:
+    return get_stack_name("apigateway")
