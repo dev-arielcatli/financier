@@ -57,16 +57,16 @@ Initial setup.
 
 Simple proof of concept for data management.
 
-- Data modelling
-  - Expense
-  - Income
-- DynamoDB setup
-- API Gateway setup
+- ✅ Data modelling
+  - ✅ Expense
+- ✅ Database stack
+  - ✅ DynamoDB setup
+- API stack
   - Create
   - Read
   - Update
   - Delete
-- Lambda functions setup
+- Lambda stack
   - Create
   - Read
   - Update
