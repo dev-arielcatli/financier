@@ -68,10 +68,13 @@ Simple proof of concept for data management.
   - Update
   - Delete
 - Lambda stack
+  - Setup lambda layers
+  - Create lambda layer creation script
   - Create
   - Read
   - Update
   - Delete
+- Convert function creations to use YAML loading
 
 ### Phase 3
 
