@@ -6,7 +6,7 @@ authors = ["Ariel Catli <dev.arielcatli@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 aws-cdk-lib = "2.148.0"
 constructs = ">=10.0.0,<11.0.0"
 python-dotenv = "^1.0.1"
@@ -17,7 +17,6 @@ mypy = "^1.11.2"
 black = "^24.8.0"
 isort = "^5.13.2"
 pydantic = "^2.9.2"
-
 
 [build-system]
 requires = ["poetry-core"]
