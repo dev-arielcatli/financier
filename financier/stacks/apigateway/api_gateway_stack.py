@@ -4,13 +4,15 @@ import aws_cdk as cdk
 from aws_cdk import aws_apigateway as _apigateway
 from constructs import Construct
 
-from financier.shared.models.features import Feature
-from financier.shared.utils.naming import (
+from shared.models.features import Feature
+from shared.utils.naming import (
     get_api_name,
     get_deployment_name,
     get_stage_name,
 )
-from financier.stacks.functions.functions_stack import FunctionsStack
+from stacks.functions.functions_stack import FunctionsStack
+
+from shared.models.urls import EXPENSE_ID
 
 
 class APIGatewayStack(cdk.Stack):
@@ -34,7 +36,8 @@ class APIGatewayStack(cdk.Stack):
         )
 
         # /expense
-        expense_resource = self.root_api.root.add_resource(Feature.EXPENSE.value)
+        expense_resource = self.root_api.root.add_resource(
+            Feature.EXPENSE.value)
         expense_resource.add_method(
             HTTPMethod.GET,
             _apigateway.LambdaIntegration(
@@ -49,7 +52,8 @@ class APIGatewayStack(cdk.Stack):
         )
 
         # /expense/{id}
-        identified_expense_resource = expense_resource.add_resource("{id}")
+        identified_expense_resource = expense_resource.add_resource(
+            f"{{{EXPENSE_ID}}}")
         identified_expense_resource.add_method(
             HTTPMethod.GET,
             _apigateway.LambdaIntegration(

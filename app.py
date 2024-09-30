@@ -2,14 +2,14 @@
 
 import aws_cdk as cdk
 
-from financier.shared.utils.naming import (
+from shared.utils.naming import (
     get_api_gateway_stack_name,
     get_database_stack_name,
     get_functions_stack_name,
 )
-from financier.stacks.apigateway.api_gateway_stack import APIGatewayStack
-from financier.stacks.database.database_stack import DatabaseStack
-from financier.stacks.functions.functions_stack import FunctionsStack
+from stacks.apigateway.api_gateway_stack import APIGatewayStack
+from stacks.database.database_stack import DatabaseStack
+from stacks.functions.functions_stack import FunctionsStack
 
 app = cdk.App()
 

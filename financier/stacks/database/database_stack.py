@@ -2,8 +2,8 @@ import aws_cdk as cdk
 from aws_cdk import aws_dynamodb as _ddb
 from constructs import Construct
 
-from financier.shared.models.base import ItemModel
-from financier.shared.utils.naming import get_app_table_name
+from shared.models.base import ItemModel
+from shared.utils.naming import get_app_table_name
 
 
 class DatabaseStack(cdk.Stack):
@@ -13,7 +13,7 @@ class DatabaseStack(cdk.Stack):
             self,
             get_app_table_name(),
             partition_key=_ddb.Attribute(
-                name=ItemModel.userId.attr_name, type=_ddb.AttributeType.STRING
+                name=ItemModel.user_id.attr_name, type=_ddb.AttributeType.STRING
             ),
             table_name=get_app_table_name(),
         )

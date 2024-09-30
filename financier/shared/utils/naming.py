@@ -1,6 +1,6 @@
-from financier.shared.config import APP_NAME, FUNCTION_CODE_PATH, STAGE, TABLE_NAME_MAIN
-from financier.shared.models.actions import Action
-from financier.shared.models.features import Feature
+from shared.config import APP_NAME, FUNCTION_CODE_PATH, STAGE, TABLE_NAME_MAIN
+from shared.models.actions import Action
+from shared.models.features import Feature
 
 
 def compose(values: list[str | None]) -> str:

@@ -2,10 +2,10 @@ import aws_cdk as cdk
 from aws_cdk import aws_lambda as _lambda
 from constructs import Construct
 
-from financier.shared.config import FUNCTION_CODE_ROOT_PATH
-from financier.shared.models.actions import Action
-from financier.shared.models.features import Feature
-from financier.shared.utils.naming import get_function_handler_path, get_function_name
+from shared.config import FUNCTION_CODE_ROOT_PATH
+from shared.models.actions import Action
+from shared.models.features import Feature
+from shared.utils.naming import get_function_handler_path, get_function_name
 
 
 class FunctionsStack(cdk.Stack):
