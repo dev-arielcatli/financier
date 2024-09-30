@@ -5,14 +5,19 @@ from constructs import Construct
 from shared.config import FUNCTION_CODE_ROOT_PATH
 from shared.models.actions import Action
 from shared.models.features import Feature
-from shared.utils.naming import get_function_handler_path, get_function_name
+from shared.utils.naming import get_function_handler_path, get_function_name, get_layer_name
 
+import os
 
 class FunctionsStack(cdk.Stack):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
-        # Expense Functions
+        self.create_layer()
+        self.create_expense_functions()
+
+        
+    def create_expense_functions(self):
         # MAIN EXPENSE
         expense_main_function_id = get_function_name(
             name=Feature.EXPENSE.value,
@@ -47,6 +52,7 @@ class FunctionsStack(cdk.Stack):
                 feature=Feature.EXPENSE,
                 action=Action.GET,
             ),
+            layers=[self.python_layer],
         )
 
         # CREATE EXPENSE
@@ -119,4 +125,15 @@ class FunctionsStack(cdk.Stack):
                 feature=Feature.EXPENSE,
                 action=Action.LIST,
             ),
+        )
+
+    def create_layer(self):
+        current_dir = os.path.dirname(__file__)
+        layers_dir = os.path.join(current_dir,  "..", "..", "..", "layers", "python.zip")
+        self.python_layer = _lambda.LayerVersion(
+            self,
+            get_layer_name("python"),
+            code=_lambda.Code.from_asset(layers_dir),
+            compatible_runtimes=[_lambda.Runtime.PYTHON_3_12],
+            layer_version_name=get_layer_name("python"),
         )

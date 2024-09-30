@@ -18,3 +18,5 @@ launch.json
 
 # mypy
 .mypy_cache
+
+layers*

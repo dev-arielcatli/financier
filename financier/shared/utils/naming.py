@@ -17,6 +17,9 @@ def get_function_name(name: str, feature: Feature, action: Action) -> str:
 def get_function_handler_path(feature: Feature, action: Action) -> str:
     return f"{FUNCTION_CODE_PATH}.{feature.value}.{action.value}.handler"
 
+def get_layer_name(name: str) -> str:
+    return compose([APP_NAME, STAGE, "layer", name])
+
 
 # TABLES
 
