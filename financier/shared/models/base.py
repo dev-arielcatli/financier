@@ -17,9 +17,9 @@ class ItemModel(Model):
     class Meta:
         table_name = get_app_table_name()
 
-    userId = UnicodeAttribute(hash_key=True, default=DEFAULT_SYSTEM_ID)
-    createdAt = UTCDateTimeAttribute(null=False, range_key=True)
+    user_id = UnicodeAttribute(hash_key=True, default=DEFAULT_SYSTEM_ID)
+    created_at = UTCDateTimeAttribute(null=False, range_key=True)
     type = UnicodeAttribute(null=False, default=ItemTypes.DEFAULT.value)
 
-    updatedAt = UTCDateTimeAttribute(null=True)
-    itemId = UnicodeAttribute(null=False)
+    updated_at = UTCDateTimeAttribute(null=True)
+    item_id = UnicodeAttribute(null=False)

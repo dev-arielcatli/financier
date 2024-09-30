@@ -20,4 +20,4 @@ class ExpenseModel(ItemModel):
 
     quantity = NumberAttribute(null=False, default=1)
     unit = UnicodeAttribute(null=False, default=DEFAULT_UNIT)
-    unitPrice = NumberAttribute(null=False, default=1)
+    unit_price = NumberAttribute(null=False, default=1)
