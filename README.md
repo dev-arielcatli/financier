@@ -64,13 +64,15 @@ Simple proof of concept for data management.
   - ✅ DynamoDB setup
 - API stack
   - Create
-  - Read
+  - ✅ Read
+  - List
   - Update
   - Delete
 - Lambda stack
   - Setup lambda layers
   - Create lambda layer creation script
-  - Create
+  - ✅ Create
+  - List
   - Read
   - Update
   - Delete
