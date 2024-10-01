@@ -21,5 +21,4 @@ for index in range(20):
         unit_price=270,
     )
 
-
     expense.save()
