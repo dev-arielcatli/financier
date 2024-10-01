@@ -139,6 +139,12 @@ class FunctionsStack(cdk.Stack):
                 feature=Feature.EXPENSE,
                 action=Action.LIST,
             ),
+            layers=[self.python_layer],
+            role=self.create_function_role(
+                f"{Feature.EXPENSE.value}-{Action.LIST.value}",
+                [database_stack.reader_policy],
+            ),
+            environment=self.GLOBAL_ENVIRONMENT,
         )
 
     def create_layer(self):
