@@ -15,6 +15,9 @@ class DatabaseStack(cdk.Stack):
             partition_key=_ddb.Attribute(
                 name=ItemModel.user_id.attr_name, type=_ddb.AttributeType.STRING
             ),
+            sort_key=_ddb.Attribute(
+                name=ItemModel.created_at.attr_name, type=_ddb.AttributeType.STRING
+            ),
             table_name=get_app_table_name(),
         )
 
