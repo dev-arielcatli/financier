@@ -41,8 +41,14 @@ Make sure to install `poetry` with `pipx`!
    STAGE=<stage>
    APP_NAME=<whatever name you want>
    AWS_DEFAULT_REGION=<aws region>
+   PYTHONPATH=${workspaceDirectory}/financier
    ```
-1. Use your CDK to deploy the app! Don't forget to bootstrap you dirty little fish.
+   - PYTHONPATH is optional but I use it for my VS Code Python path settings.
+1. [TODO] Define your Lambda layer. ⚠️ I am manually creating the lambda layer deployment .zip for now, but creating site-packages used by the handler code. Note that the project is using `pyndantic` and the lambdas deployed are based on `arm64` architecture. Also, make sure to compile using `python 3.12`. We must build the lib using this,
+   ```
+   pip install --platform manylinux2014_x86_64 --implementation cp --python-version 3.12 --only-binary=:all: --upgrade pydantic --target <directory>
+   ```
+   Here is the [source](https://docs.pydantic.dev/latest/integrations/aws_lambda/#installing-python-libraries-for-aws-lambda-functions).
 
 ## 🛣️ Roadmap
 
