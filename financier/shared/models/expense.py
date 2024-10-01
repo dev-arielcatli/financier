@@ -1,10 +1,10 @@
+from typing import Optional
+
+from pydantic import Field
 from pynamodb.attributes import ListAttribute, NumberAttribute, UnicodeAttribute
 from shared.config import AWS_DEFAULT_REGION, DEFAULT_UNIT
-from shared.models.base import ItemModel, ItemTypes, ItemPydanticModel
+from shared.models.base import ItemModel, ItemPydanticModel, ItemTypes
 from shared.utils.naming import get_app_table_name
-
-from typing import Optional
-from pydantic import Field
 
 
 class ExpenseModel(ItemModel):
@@ -23,6 +23,7 @@ class ExpenseModel(ItemModel):
     quantity = NumberAttribute(null=False, default=1)
     unit = UnicodeAttribute(null=False, default=DEFAULT_UNIT)
     unit_price = NumberAttribute(null=False, default=1)
+
 
 class ExpensePydanticModel(ItemPydanticModel):
     user_id: Optional[str] = None

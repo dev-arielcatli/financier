@@ -1,13 +1,13 @@
+from datetime import datetime
 from enum import Enum
+from typing import Optional
 
+from pydantic import BaseModel, field_serializer
 from pynamodb.attributes import UnicodeAttribute, UTCDateTimeAttribute
 from pynamodb.models import Model
 from shared.config import DEFAULT_SYSTEM_ID
 from shared.utils.naming import get_app_table_name
-from typing import Optional
-from pydantic import BaseModel, field_serializer
 
-from datetime import datetime
 
 class ItemTypes(Enum):
     EXPENSE = "expense"
@@ -36,6 +36,7 @@ class ItemModel(Model):
         if not self.created_at:
             self.created_at = now
 
+
 class ItemPydanticModel(BaseModel):
     user_id: str
     created_at: Optional[datetime] = None
@@ -43,6 +44,6 @@ class ItemPydanticModel(BaseModel):
     updated_at: Optional[datetime] = None
     item_id: Optional[str] = None
 
-    @field_serializer('type')
+    @field_serializer("type")
     def serialize_type(value: ItemTypes) -> str:
         return value.value

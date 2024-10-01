@@ -1,5 +1,6 @@
 import json
 
+
 def extract_path_parameters(event: dict) -> dict:
     return event.get("pathParameters", {}) or {}
 
