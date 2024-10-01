@@ -10,7 +10,7 @@ def make_response(body: dict, status: HTTPStatus = HTTPStatus.OK) -> dict:
         "headers": {"Content-Type": "application/json"},
         "isBase64Encoded": False,
         "multiValueHeaders": {},
-        "body": json.dumps(body, default=str),
+        "body": json.dumps(body, default=str) if status != HTTPStatus.NO_CONTENT else None,
     }
 
 
