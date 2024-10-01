@@ -68,20 +68,20 @@ Simple proof of concept for data management.
   - ✅ Expense
 - ✅ Database stack
   - ✅ DynamoDB setup
-- API stack
-  - Create
+- ✅ API stack
+  - ✅ Create
   - ✅ Read
   - ✅ List
-  - Update
-  - Delete
+  - ✅ Update
+  - ✅ Delete
 - Lambda stack
-  - Setup lambda layers
+  - ✅ Setup lambda layers
   - Create lambda layer creation script
-  - Create
+  - ✅ Create
   - ✅ List
   - ✅ Read
-  - Update
-  - Delete
+  - ✅ Update
+  - ✅ Delete
 - Convert function creations to use YAML loading
 
 ### Phase 3
