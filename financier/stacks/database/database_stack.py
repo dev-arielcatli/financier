@@ -41,6 +41,7 @@ class DatabaseStack(cdk.Stack):
                 "dynamodb:Query",
                 "dynamodb:DescribeStream",
                 "dynamodb:PutItem",
+                "dynamodn:DeleteItem",
                 "dynamodb:BatchWriteItem",
                 "dynamodb:UpdateItem",
                 "dynamodb:ListStreams",
