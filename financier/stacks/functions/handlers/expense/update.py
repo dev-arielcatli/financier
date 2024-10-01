@@ -32,6 +32,7 @@ def handler(event, context):
     expense_to_update = ExpenseModel(**expense.model_dump())
 
     try:
+        # TODO: There is a problem here where created_at can be changed because we're passing the whole model
         expense_to_update.save(ExpenseModel.item_id.exists())
     except PutError as error:
         if error.cause_response_code == "ConditionalCheckFailedException":
