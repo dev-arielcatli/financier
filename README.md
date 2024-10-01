@@ -65,15 +65,15 @@ Simple proof of concept for data management.
 - API stack
   - Create
   - ✅ Read
-  - List
+  - ✅ List
   - Update
   - Delete
 - Lambda stack
   - Setup lambda layers
   - Create lambda layer creation script
-  - ✅ Create
-  - List
-  - Read
+  - Create
+  - ✅ List
+  - ✅ Read
   - Update
   - Delete
 - Convert function creations to use YAML loading
