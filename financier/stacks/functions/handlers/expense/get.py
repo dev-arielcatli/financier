@@ -7,13 +7,12 @@ from shared.models.urls import EXPENSE_ID
 from shared.utils.requests import extract_path_parameters
 from shared.utils.responses import make_error_response, make_response
 
+from shared.services.entities_manager import load as load_expense
+
 
 def handler(event, context):
     expense_id = extract_path_parameters(event)[EXPENSE_ID]
-    items = ExpenseModel.query(
-        hash_key=DEFAULT_SYSTEM_ID, filter_condition=ExpenseModel.item_id == expense_id
-    )
-    items_list = list(items)
+    items_list = load_expense(ExpenseModel, DEFAULT_SYSTEM_ID, ExpenseModel.item_id == expense_id)
     if not items_list:
         return make_error_response(ErrorCodes.MISSING_EXPENSE, HTTPStatus.NOT_FOUND)
 
