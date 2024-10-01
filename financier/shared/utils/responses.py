@@ -1,6 +1,8 @@
 from http import HTTPStatus
 from shared.models.errors import ErrorCodes
 
+import json
+
 
 def make_response(body: dict, status: HTTPStatus = HTTPStatus.OK) -> dict:
     return {
@@ -10,7 +12,7 @@ def make_response(body: dict, status: HTTPStatus = HTTPStatus.OK) -> dict:
         },
         "isBase64Encoded": False,
         "multiValueHeaders": {},
-        "body": body
+        "body": json.dumps(body, default=str)
     }
 
 
@@ -22,7 +24,7 @@ def make_error_response(error_code: ErrorCodes = ErrorCodes.UNHANDLED_ERROR, sta
             "x-amzn-ErrorType": status.value
         },
         "isBase64Encoded": False,
-        "body": {
+        "body": json.dumps({
             "error": error_code.value,
-        }
+        })
     }
