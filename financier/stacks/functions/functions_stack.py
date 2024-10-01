@@ -64,7 +64,7 @@ class FunctionsStack(cdk.Stack):
             layers=[self.python_layer],
             role=self.create_function_role(
                 f"{Feature.EXPENSE.value}-{Action.GET.value}",
-                [database_stack.reader_policy],
+                [database_stack.reader_writer_policy],
             ),
             environment=self.GLOBAL_ENVIRONMENT,
         )
@@ -85,6 +85,12 @@ class FunctionsStack(cdk.Stack):
                 feature=Feature.EXPENSE,
                 action=Action.CREATE,
             ),
+            layers=[self.python_layer],
+            role=self.create_function_role(
+                f"{Feature.EXPENSE.value}-{Action.CREATE.value}",
+                [database_stack.reader_writer_policy],
+            ),
+            environment=self.GLOBAL_ENVIRONMENT,
         )
 
         # UPDATE EXPENSE
@@ -142,7 +148,7 @@ class FunctionsStack(cdk.Stack):
             layers=[self.python_layer],
             role=self.create_function_role(
                 f"{Feature.EXPENSE.value}-{Action.LIST.value}",
-                [database_stack.reader_policy],
+                [database_stack.reader_writer_policy],
             ),
             environment=self.GLOBAL_ENVIRONMENT,
         )
