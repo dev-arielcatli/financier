@@ -20,11 +20,11 @@ class ItemModel(Model):
         table_name = get_app_table_name()
 
     user_id = UnicodeAttribute(hash_key=True, default=DEFAULT_SYSTEM_ID)
-    created_at = UTCDateTimeAttribute(null=False, range_key=True)
+    item_id = UnicodeAttribute(range_key=True, null=False)
+    created_at = UTCDateTimeAttribute(null=False)
     type = UnicodeAttribute(null=False, default=ItemTypes.DEFAULT.value)
 
     updated_at = UTCDateTimeAttribute(null=True)
-    item_id = UnicodeAttribute(null=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
