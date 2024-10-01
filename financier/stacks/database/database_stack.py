@@ -24,7 +24,7 @@ class DatabaseStack(cdk.Stack):
         self.create_db_policies()
 
     def create_db_policies(self):
-        self.reader_policy = _iam.PolicyStatement(
+        self.reader_writer_policy = _iam.PolicyStatement(
             actions=[
                 "dynamodb:BatchGetItem",
                 "dynamodb:DescribeGlobalTable",
