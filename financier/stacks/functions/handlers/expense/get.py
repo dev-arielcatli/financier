@@ -12,7 +12,7 @@ from shared.services.entities_manager import load as load_expense
 
 def handler(event, context):
     expense_id = extract_path_parameters(event)[EXPENSE_ID]
-    items_list = load_expense(ExpenseModel, DEFAULT_SYSTEM_ID, ExpenseModel.item_id == expense_id)
+    items_list = load_expense(model_type=ExpenseModel, item_id=DEFAULT_SYSTEM_ID, range_key_condition=ExpenseModel.item_id == expense_id)
     if not items_list:
         return make_error_response(ErrorCodes.MISSING_EXPENSE, HTTPStatus.NOT_FOUND)
 
