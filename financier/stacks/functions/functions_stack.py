@@ -2,22 +2,31 @@ import aws_cdk as cdk
 from aws_cdk import aws_lambda as _lambda
 from constructs import Construct
 
-from shared.config import FUNCTION_CODE_ROOT_PATH
+from shared.config import FUNCTION_CODE_ROOT_PATH, STAGE, APP_NAME
 from shared.models.actions import Action
 from shared.models.features import Feature
-from shared.utils.naming import get_function_handler_path, get_function_name, get_layer_name
+from shared.utils.naming import get_function_handler_path, get_function_name, get_layer_name, get_function_role_name
+
+from stacks.database.database_stack import DatabaseStack
+
+from aws_cdk import (
+    aws_iam as _iam
+)
 
 import os
 
 class FunctionsStack(cdk.Stack):
-    def __init__(self, scope: Construct, id: str, **kwargs) -> None:
+    def __init__(self, scope: Construct, id: str, database_stack: DatabaseStack,  **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
+        self.GLOBAL_ENVIRONMENT = {
+            "STAGE": STAGE,
+            "APP_NAME": APP_NAME
+        }
         self.create_layer()
-        self.create_expense_functions()
-
+        self.create_expense_functions(database_stack)
         
-    def create_expense_functions(self):
+    def create_expense_functions(self, database_stack: DatabaseStack):
         # MAIN EXPENSE
         expense_main_function_id = get_function_name(
             name=Feature.EXPENSE.value,
@@ -53,6 +62,8 @@ class FunctionsStack(cdk.Stack):
                 action=Action.GET,
             ),
             layers=[self.python_layer],
+            role = self.create_function_role(f"{Feature.EXPENSE.value}-{Action.GET.value}", [database_stack.reader_policy]),
+            environment=self.GLOBAL_ENVIRONMENT
         )
 
         # CREATE EXPENSE
@@ -137,3 +148,25 @@ class FunctionsStack(cdk.Stack):
             compatible_runtimes=[_lambda.Runtime.PYTHON_3_12],
             layer_version_name=get_layer_name("python"),
         )
+
+    def create_function_role(self, name:str, policies: list[_iam.PolicyStatement]) -> _iam.Role:
+        default_role_name = get_function_role_name(name)
+        role = _iam.Role(
+            self,
+            default_role_name,
+            assumed_by=_iam.ServicePrincipal("lambda.amazonaws.com"),
+            role_name=default_role_name,
+        )
+        role.add_to_policy(
+            _iam.PolicyStatement(
+                actions=[
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                ],
+                resources=["*"],
+            )
+        )
+        for policy in policies:
+            role.add_to_policy(policy)
+        return role 
