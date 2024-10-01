@@ -31,3 +31,12 @@ def make_error_response(
             }
         ),
     }
+
+def make_list_response(items: list, last_evaluated_key: str, status: HTTPStatus = HTTPStatus.OK) -> dict:
+    return make_response(
+        {
+            "items": items,
+            "last_evaluated_key": last_evaluated_key,
+        },
+        status,
+    )
