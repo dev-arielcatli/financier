@@ -10,7 +10,6 @@ from shared.utils.requests import extract_body
 from shared.utils.responses import make_response, make_error_response
 
 from shared.models.expense import ExpenseModel, ExpensePydanticModel
-from shared.services.entities_manager import load as load_expense
 from http import HTTPStatus
 from shared.models.errors import ErrorCodes
 
