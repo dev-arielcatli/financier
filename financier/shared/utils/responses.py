@@ -17,6 +17,7 @@ def make_response(body: dict, status: HTTPStatus = HTTPStatus.OK) -> dict:
 def make_error_response(
     error_code: ErrorCodes = ErrorCodes.UNHANDLED_ERROR,
     status: HTTPStatus = HTTPStatus.INTERNAL_SERVER_ERROR,
+    body: dict = None,
 ) -> dict:
     return {
         "statusCode": status.value,
@@ -28,6 +29,7 @@ def make_error_response(
         "body": json.dumps(
             {
                 "error": error_code.value,
+                "message": body if body else status.description,
             }
         ),
     }
