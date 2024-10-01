@@ -36,6 +36,7 @@ def make_list_response(items: list, last_evaluated_key: str, status: HTTPStatus 
     return make_response(
         {
             "items": items,
+            "count": len(items),
             "last_evaluated_key": last_evaluated_key,
         },
         status,
