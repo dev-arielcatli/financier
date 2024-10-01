@@ -109,6 +109,12 @@ class FunctionsStack(cdk.Stack):
                 feature=Feature.EXPENSE,
                 action=Action.UPDATE,
             ),
+            layers=[self.python_layer],
+            role=self.create_function_role(
+                f"{Feature.EXPENSE.value}-{Action.UPDATE.value}",
+                [database_stack.reader_writer_policy],
+            ),
+            environment=self.GLOBAL_ENVIRONMENT,
         )
 
         # DELETE EXPENSE
