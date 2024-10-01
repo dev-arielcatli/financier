@@ -2,7 +2,6 @@ from enum import Enum
 
 from pynamodb.attributes import UnicodeAttribute, UTCDateTimeAttribute
 from pynamodb.models import Model
-
 from shared.config import DEFAULT_SYSTEM_ID
 from shared.utils.naming import get_app_table_name
 

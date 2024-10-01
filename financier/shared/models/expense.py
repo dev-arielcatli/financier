@@ -1,5 +1,4 @@
 from pynamodb.attributes import ListAttribute, NumberAttribute, UnicodeAttribute
-
 from shared.config import AWS_DEFAULT_REGION, DEFAULT_UNIT
 from shared.models.base import ItemModel, ItemTypes
 from shared.utils.naming import get_app_table_name

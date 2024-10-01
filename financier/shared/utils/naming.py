@@ -17,11 +17,14 @@ def get_function_name(name: str, feature: Feature, action: Action) -> str:
 def get_function_handler_path(feature: Feature, action: Action) -> str:
     return f"{FUNCTION_CODE_PATH}.{feature.value}.{action.value}.handler"
 
+
 def get_layer_name(name: str) -> str:
     return compose([APP_NAME, STAGE, "layer", name])
 
+
 def get_function_role_name(name: str) -> str:
     return compose([APP_NAME, STAGE, "function", "role", name])
+
 
 def get_default_function_role_name() -> str:
     return get_function_role_name("default")
@@ -36,6 +39,7 @@ def get_table_name(name: str) -> str:
 
 def get_app_table_name() -> str:
     return compose([APP_NAME, STAGE, "table", TABLE_NAME_MAIN])
+
 
 def get_app_table_role_name(role: str) -> str:
     return compose([APP_NAME, STAGE, "table", role, "role"])

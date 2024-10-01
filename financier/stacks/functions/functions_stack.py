@@ -1,31 +1,31 @@
-import aws_cdk as cdk
-from aws_cdk import aws_lambda as _lambda
-from constructs import Construct
-
-from shared.config import FUNCTION_CODE_ROOT_PATH, STAGE, APP_NAME
-from shared.models.actions import Action
-from shared.models.features import Feature
-from shared.utils.naming import get_function_handler_path, get_function_name, get_layer_name, get_function_role_name
-
-from stacks.database.database_stack import DatabaseStack
-
-from aws_cdk import (
-    aws_iam as _iam
-)
-
 import os
 
+import aws_cdk as cdk
+from aws_cdk import aws_iam as _iam
+from aws_cdk import aws_lambda as _lambda
+from constructs import Construct
+from shared.config import APP_NAME, FUNCTION_CODE_ROOT_PATH, STAGE
+from shared.models.actions import Action
+from shared.models.features import Feature
+from shared.utils.naming import (
+    get_function_handler_path,
+    get_function_name,
+    get_function_role_name,
+    get_layer_name,
+)
+from stacks.database.database_stack import DatabaseStack
+
+
 class FunctionsStack(cdk.Stack):
-    def __init__(self, scope: Construct, id: str, database_stack: DatabaseStack,  **kwargs) -> None:
+    def __init__(
+        self, scope: Construct, id: str, database_stack: DatabaseStack, **kwargs
+    ) -> None:
         super().__init__(scope, id, **kwargs)
 
-        self.GLOBAL_ENVIRONMENT = {
-            "STAGE": STAGE,
-            "APP_NAME": APP_NAME
-        }
+        self.GLOBAL_ENVIRONMENT = {"STAGE": STAGE, "APP_NAME": APP_NAME}
         self.create_layer()
         self.create_expense_functions(database_stack)
-        
+
     def create_expense_functions(self, database_stack: DatabaseStack):
         # MAIN EXPENSE
         expense_main_function_id = get_function_name(
@@ -62,8 +62,11 @@ class FunctionsStack(cdk.Stack):
                 action=Action.GET,
             ),
             layers=[self.python_layer],
-            role = self.create_function_role(f"{Feature.EXPENSE.value}-{Action.GET.value}", [database_stack.reader_policy]),
-            environment=self.GLOBAL_ENVIRONMENT
+            role=self.create_function_role(
+                f"{Feature.EXPENSE.value}-{Action.GET.value}",
+                [database_stack.reader_policy],
+            ),
+            environment=self.GLOBAL_ENVIRONMENT,
         )
 
         # CREATE EXPENSE
@@ -140,7 +143,7 @@ class FunctionsStack(cdk.Stack):
 
     def create_layer(self):
         current_dir = os.path.dirname(__file__)
-        layers_dir = os.path.join(current_dir,  "..", "..", "..", "layers", "python.zip")
+        layers_dir = os.path.join(current_dir, "..", "..", "..", "layers", "python.zip")
         self.python_layer = _lambda.LayerVersion(
             self,
             get_layer_name("python"),
@@ -149,7 +152,9 @@ class FunctionsStack(cdk.Stack):
             layer_version_name=get_layer_name("python"),
         )
 
-    def create_function_role(self, name:str, policies: list[_iam.PolicyStatement]) -> _iam.Role:
+    def create_function_role(
+        self, name: str, policies: list[_iam.PolicyStatement]
+    ) -> _iam.Role:
         default_role_name = get_function_role_name(name)
         role = _iam.Role(
             self,
@@ -162,11 +167,11 @@ class FunctionsStack(cdk.Stack):
                 actions=[
                     "logs:CreateLogGroup",
                     "logs:CreateLogStream",
-                    "logs:PutLogEvents"
+                    "logs:PutLogEvents",
                 ],
                 resources=["*"],
             )
         )
         for policy in policies:
             role.add_to_policy(policy)
-        return role 
+        return role

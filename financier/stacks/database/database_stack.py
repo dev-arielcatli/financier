@@ -1,13 +1,9 @@
 import aws_cdk as cdk
 from aws_cdk import aws_dynamodb as _ddb
+from aws_cdk import aws_iam as _iam
 from constructs import Construct
-
 from shared.models.base import ItemModel
 from shared.utils.naming import get_app_table_name, get_app_table_role_name
-
-from aws_cdk import (
-    aws_iam as _iam
-)
 
 
 class DatabaseStack(cdk.Stack):
@@ -23,29 +19,28 @@ class DatabaseStack(cdk.Stack):
         )
 
         self.create_db_policies()
-    
+
     def create_db_policies(self):
         self.reader_policy = _iam.PolicyStatement(
-                actions=[
-                    "dynamodb:BatchGetItem",
-                    "dynamodb:DescribeGlobalTable",
-                    "dynamodb:DescribeGlobalTableSettings",
-                    "dynamodb:DescribeLimits",
-                    "dynamodb:DescribeReservedCapacity",
-                    "dynamodb:DescribeReservedCapacityOfferings",
-                    "dynamodb:DescribeStream",
-                    "dynamodb:DescribeTable",
-                    "dynamodb:DescribeTimeToLive",
-                    "dynamodb:GetItem",
-                    "dynamodb:GetRecords",
-                    "dynamodb:GetShardIterator",
-                    "dynamodb:Query",
-                    "dynamodb:DescribeStream",
-                    "dynamodb:PutItem",
-                    "dynamodb:BatchWriteItem",
-                    "dynamodb:UpdateItem",
-                    "dynamodb:ListStreams",
-                ],
-                resources=[self.table.table_arn],
-            )
-        
+            actions=[
+                "dynamodb:BatchGetItem",
+                "dynamodb:DescribeGlobalTable",
+                "dynamodb:DescribeGlobalTableSettings",
+                "dynamodb:DescribeLimits",
+                "dynamodb:DescribeReservedCapacity",
+                "dynamodb:DescribeReservedCapacityOfferings",
+                "dynamodb:DescribeStream",
+                "dynamodb:DescribeTable",
+                "dynamodb:DescribeTimeToLive",
+                "dynamodb:GetItem",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:Query",
+                "dynamodb:DescribeStream",
+                "dynamodb:PutItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:ListStreams",
+            ],
+            resources=[self.table.table_arn],
+        )
