@@ -1,7 +1,8 @@
 from unittest import TestCase
-from stacks.database.database_stack import DatabaseStack
 
 import aws_cdk as cdk
+from stacks.database.database_stack import DatabaseStack
+
 
 class TestDatabaseStack(TestCase):
     def setUp(self):
@@ -12,16 +13,13 @@ class TestDatabaseStack(TestCase):
     def test_creation_of_global_table(self):
         self.assertTrue(self.database_stack)
         self.template.resource_count_is("AWS::DynamoDB::GlobalTable", 1)
-        self.template.has_resource_properties("AWS::DynamoDB::GlobalTable", {
-            "TableName": "financier-dev-table-main",
-            "KeySchema": [
-                {
-                    "AttributeName": "user_id",
-                    "KeyType": "HASH"
-                },
-                {
-                    "AttributeName": "item_id",
-                    "KeyType": "RANGE"
-                }
-            ],
-        })
+        self.template.has_resource_properties(
+            "AWS::DynamoDB::GlobalTable",
+            {
+                "TableName": "financier-dev-table-main",
+                "KeySchema": [
+                    {"AttributeName": "user_id", "KeyType": "HASH"},
+                    {"AttributeName": "item_id", "KeyType": "RANGE"},
+                ],
+            },
+        )
