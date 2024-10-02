@@ -8,12 +8,14 @@ from shared.models.expense import ExpenseModel
 from shared.services.entities_manager import load_item
 from pynamodb.exceptions import DoesNotExist
 
+from shared.config import STAGE, APP_NAME
+
 @moto.mock_aws
 class TestEntitiesManager(TestCase):
     def setUp(self) -> None:
         self.dynamodb = boto3.resource('dynamodb')
         self.table = self.dynamodb.create_table(
-            TableName='financier-dev-table-main',
+            TableName=f'{APP_NAME}-{STAGE}-table-main',
             KeySchema=[
                 {
                     'AttributeName': 'item_id',

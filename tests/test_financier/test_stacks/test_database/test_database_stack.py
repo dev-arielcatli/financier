@@ -3,6 +3,7 @@ from unittest import TestCase
 import aws_cdk as cdk
 from stacks.database.database_stack import DatabaseStack
 
+from shared.config import STAGE, APP_NAME
 
 class TestDatabaseStack(TestCase):
     def setUp(self):
@@ -16,7 +17,7 @@ class TestDatabaseStack(TestCase):
         self.template.has_resource_properties(
             "AWS::DynamoDB::GlobalTable",
             {
-                "TableName": "financier-dev-table-main",
+                "TableName": f"{APP_NAME}-{STAGE}-table-main",
                 "KeySchema": [
                     {"AttributeName": "user_id", "KeyType": "HASH"},
                     {"AttributeName": "item_id", "KeyType": "RANGE"},
