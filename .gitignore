@@ -21,3 +21,6 @@ launch.json
 
 # add layers but ignore any .zip
 layers/*.zip
+
+# coverage files
+.coverage
