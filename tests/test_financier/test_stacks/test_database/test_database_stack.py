@@ -1,9 +1,9 @@
 from unittest import TestCase
 
 import aws_cdk as cdk
+from shared.config import APP_NAME, STAGE
 from stacks.database.database_stack import DatabaseStack
 
-from shared.config import STAGE, APP_NAME
 
 class TestDatabaseStack(TestCase):
     def setUp(self):

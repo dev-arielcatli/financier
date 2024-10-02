@@ -1,5 +1,7 @@
-from shared.utils import requests
 from unittest import TestCase
+
+from shared.utils import requests
+
 
 class TestRequests(TestCase):
     def test_extract_path_parameters(self):
@@ -12,12 +14,14 @@ class TestRequests(TestCase):
 
     def test_extract_multi_value_query_parameters(self):
         event = {"multiValueQueryStringParameters": {"test": ["test"]}}
-        self.assertEqual(requests.extract_multi_value_query_parameters(event), {"test": ["test"]})
+        self.assertEqual(
+            requests.extract_multi_value_query_parameters(event), {"test": ["test"]}
+        )
 
     def test_extract_body(self):
         event = {"body": '{"test": "test"}'}
         self.assertEqual(requests.extract_body(event), {"test": "test"})
-    
+
     def test_extract_body_empty(self):
         event = {}
         self.assertEqual(requests.extract_body(event), {})
