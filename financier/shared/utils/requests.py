@@ -14,5 +14,7 @@ def extract_multi_value_query_parameters(event: dict) -> dict:
 
 
 def extract_body(event: dict) -> dict:
-    body_str = event.get("body", "")
+    body_str = event.get("body", "{}")
+    if not body_str:
+        body_str = "{}"
     return json.loads(body_str) or {}
