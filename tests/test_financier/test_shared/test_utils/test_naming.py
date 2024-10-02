@@ -6,7 +6,6 @@ from shared.models.actions import Action
 
 from shared.config import STAGE, APP_NAME
 
-# TODO: Make these stage agnostic
 class TestNaming(TestCase):
         
 
