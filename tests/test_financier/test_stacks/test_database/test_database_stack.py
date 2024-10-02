@@ -23,3 +23,11 @@ class TestDatabaseStack(TestCase):
                 ],
             },
         )
+        important_policies = [
+            "dynamodb:GetItem",
+            "dynamodb:PutItem",
+            "dynamodb:UpdateItem",
+            "dynamodb:DeleteItem",
+        ]
+        for policy in important_policies:
+            self.assertIn(policy, self.database_stack.reader_writer_policy.actions)
