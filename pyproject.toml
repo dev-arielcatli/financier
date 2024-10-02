@@ -19,6 +19,7 @@ isort = "^5.13.2"
 pydantic = "^2.9.2"
 pytest = "^8.3.3"
 pytest-sugar = "^1.0.0"
+moto = {extras = ["all"], version = "^5.0.16"}
 
 [build-system]
 requires = ["poetry-core"]
