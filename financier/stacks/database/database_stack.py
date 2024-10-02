@@ -3,7 +3,7 @@ from aws_cdk import aws_dynamodb as _ddb
 from aws_cdk import aws_iam as _iam
 from constructs import Construct
 from shared.models.base import ItemModel
-from shared.utils.naming import get_app_table_name, get_app_table_role_name
+from shared.utils.naming import get_app_table_name
 
 
 class DatabaseStack(cdk.Stack):
