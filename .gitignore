@@ -19,4 +19,5 @@ launch.json
 # mypy
 .mypy_cache
 
-layers*
+# add layers but ignore any .zip
+layers/*.zip
