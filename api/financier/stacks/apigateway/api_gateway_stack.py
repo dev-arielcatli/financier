@@ -15,13 +15,14 @@ class APIGatewayStack(cdk.Stack):
     ) -> None:
         super().__init__(scope, id, **kwargs)
 
-        api_name = get_api_name(Feature.DEFAULT.value)
+        api_name = get_api_name(Feature.ROOT.value)
         self.root_api = _apigateway.LambdaRestApi(
             self,
             api_name,
             rest_api_name=api_name,
-            handler=functions_stack.expense_main_function,
+            handler=functions_stack.fastapi_function,
             deploy=False,
+            proxy=True,
             # TODO: Update this when we have a domain
             default_cors_preflight_options=_apigateway.CorsOptions(
                 allow_origins=_apigateway.Cors.ALL_ORIGINS,
@@ -29,40 +30,11 @@ class APIGatewayStack(cdk.Stack):
             ),
         )
 
-        # /expense
-        expense_resource = self.root_api.root.add_resource(Feature.EXPENSE.value)
-        expense_resource.add_method(
-            HTTPMethod.GET,
-            _apigateway.LambdaIntegration(
-                functions_stack.expense_list_function,
-            ),
-        )
-        expense_resource.add_method(
-            HTTPMethod.POST,
-            _apigateway.LambdaIntegration(
-                functions_stack.expense_create_function,
-            ),
-        )
-
-        # /expense/{id}
-        identified_expense_resource = expense_resource.add_resource(f"{{{EXPENSE_ID}}}")
-        identified_expense_resource.add_method(
-            HTTPMethod.GET,
-            _apigateway.LambdaIntegration(
-                functions_stack.expense_get_function,
-            ),
-        )
-        identified_expense_resource.add_method(
-            HTTPMethod.PUT,
-            _apigateway.LambdaIntegration(
-                functions_stack.expense_update_function,
-            ),
-        )
-        identified_expense_resource.add_method(
-            HTTPMethod.DELETE,
-            _apigateway.LambdaIntegration(
-                functions_stack.expense_delete_function,
-            ),
+        self.main_api = self.root_api.root.add_resource("api")
+        self.main_api.add_proxy(
+            default_integration=_apigateway.LambdaIntegration(
+                functions_stack.fastapi_function
+            )
         )
 
         # DEPLOYMENTS

@@ -9,3 +9,6 @@ python-dotenv==1.0.1
 six==1.16.0
 typing_extensions==4.12.2
 urllib3==2.2.3
+fastapi==0.115.0
+uvicorn==0.31.0
+mangum==0.19.0
