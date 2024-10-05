@@ -16,4 +16,4 @@ DEFAULT_UNIT = "unit"
 
 # INFRASTRUCTURE
 FUNCTION_CODE_ROOT_PATH = "financier"
-FUNCTION_CODE_PATH = f"stacks.functions.handlers"
+FASTAPI_FUNCTION_CODE_PATH = "stacks.functions.app.app.handler"

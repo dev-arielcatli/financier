@@ -17,12 +17,6 @@ class TestNaming(TestCase):
             f"{APP_NAME}-{STAGE}-function-expense-test-get",
         )
 
-    def test_get_function_handler_path(self):
-        self.assertEqual(
-            naming.get_function_handler_path(Feature.EXPENSE, Action.GET),
-            "stacks.functions.handlers.expense.get.handler",
-        )
-
     def test_get_layer_name(self):
         self.assertEqual(
             naming.get_layer_name("test"), f"{APP_NAME}-{STAGE}-layer-test"

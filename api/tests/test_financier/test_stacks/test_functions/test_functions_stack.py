@@ -18,4 +18,4 @@ class TestFunctionsStack(TestCase):
         self.template.resource_count_is("AWS::Lambda::LayerVersion", 1)
 
     def test_creation_of_expense_functions(self):
-        self.template.resource_count_is("AWS::Lambda::Function", 6)
+        self.template.resource_count_is("AWS::Lambda::Function", 1)

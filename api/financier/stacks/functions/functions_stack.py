@@ -4,11 +4,15 @@ import aws_cdk as cdk
 from aws_cdk import aws_iam as _iam
 from aws_cdk import aws_lambda as _lambda
 from constructs import Construct
-from shared.config import APP_NAME, FUNCTION_CODE_ROOT_PATH, STAGE
+from shared.config import (
+    APP_NAME,
+    FASTAPI_FUNCTION_CODE_PATH,
+    FUNCTION_CODE_ROOT_PATH,
+    STAGE,
+)
 from shared.models.actions import Action
 from shared.models.features import Feature
 from shared.utils.naming import (
-    get_function_handler_path,
     get_function_name,
     get_function_role_name,
     get_layer_name,
@@ -24,142 +28,24 @@ class FunctionsStack(cdk.Stack):
 
         self.GLOBAL_ENVIRONMENT = {"STAGE": STAGE, "APP_NAME": APP_NAME}
         self.create_layer()
-        self.create_expense_functions(database_stack)
+        self.create_fastapi_function(database_stack=database_stack)
 
-    def create_expense_functions(self, database_stack: DatabaseStack):
-        # MAIN EXPENSE
-        expense_main_function_id = get_function_name(
-            name=Feature.EXPENSE.value,
-            feature=Feature.EXPENSE,
+    def create_fastapi_function(self, database_stack: DatabaseStack):
+        fastapi_function_id = get_function_name(
+            name="fastapi",
+            feature=Feature.FASTAPI,
             action=Action.MAIN,
         )
-        self.expense_main_function = _lambda.Function(
+        self.fastapi_function = _lambda.Function(
             self,
-            expense_main_function_id,
-            function_name=expense_main_function_id,
+            fastapi_function_id,
+            function_name=fastapi_function_id,
             runtime=_lambda.Runtime.PYTHON_3_12,
             code=_lambda.Code.from_asset(FUNCTION_CODE_ROOT_PATH),
-            handler=get_function_handler_path(
-                feature=Feature.EXPENSE,
-                action=Action.MAIN,
-            ),
-        )
-
-        # GET EXPENSE
-        expense_get_function_id = get_function_name(
-            name=Feature.EXPENSE.value,
-            feature=Feature.EXPENSE,
-            action=Action.GET,
-        )
-        self.expense_get_function = _lambda.Function(
-            self,
-            expense_get_function_id,
-            function_name=expense_get_function_id,
-            runtime=_lambda.Runtime.PYTHON_3_12,
-            code=_lambda.Code.from_asset(FUNCTION_CODE_ROOT_PATH),
-            handler=get_function_handler_path(
-                feature=Feature.EXPENSE,
-                action=Action.GET,
-            ),
+            handler=FASTAPI_FUNCTION_CODE_PATH,
             layers=[self.python_layer],
             role=self.create_function_role(
-                f"{Feature.EXPENSE.value}-{Action.GET.value}",
-                [database_stack.reader_writer_policy],
-            ),
-            environment=self.GLOBAL_ENVIRONMENT,
-        )
-
-        # CREATE EXPENSE
-        expense_create_function_id = get_function_name(
-            name=Feature.EXPENSE.value,
-            feature=Feature.EXPENSE,
-            action=Action.CREATE,
-        )
-        self.expense_create_function = _lambda.Function(
-            self,
-            expense_create_function_id,
-            function_name=expense_create_function_id,
-            runtime=_lambda.Runtime.PYTHON_3_12,
-            code=_lambda.Code.from_asset(FUNCTION_CODE_ROOT_PATH),
-            handler=get_function_handler_path(
-                feature=Feature.EXPENSE,
-                action=Action.CREATE,
-            ),
-            layers=[self.python_layer],
-            role=self.create_function_role(
-                f"{Feature.EXPENSE.value}-{Action.CREATE.value}",
-                [database_stack.reader_writer_policy],
-            ),
-            environment=self.GLOBAL_ENVIRONMENT,
-        )
-
-        # UPDATE EXPENSE
-        expense_update_function_id = get_function_name(
-            name=Feature.EXPENSE.value,
-            feature=Feature.EXPENSE,
-            action=Action.UPDATE,
-        )
-        self.expense_update_function = _lambda.Function(
-            self,
-            expense_update_function_id,
-            function_name=expense_update_function_id,
-            runtime=_lambda.Runtime.PYTHON_3_12,
-            code=_lambda.Code.from_asset(FUNCTION_CODE_ROOT_PATH),
-            handler=get_function_handler_path(
-                feature=Feature.EXPENSE,
-                action=Action.UPDATE,
-            ),
-            layers=[self.python_layer],
-            role=self.create_function_role(
-                f"{Feature.EXPENSE.value}-{Action.UPDATE.value}",
-                [database_stack.reader_writer_policy],
-            ),
-            environment=self.GLOBAL_ENVIRONMENT,
-        )
-
-        # DELETE EXPENSE
-        expense_delete_function_id = get_function_name(
-            name=Feature.EXPENSE.value,
-            feature=Feature.EXPENSE,
-            action=Action.DELETE,
-        )
-        self.expense_delete_function = _lambda.Function(
-            self,
-            expense_delete_function_id,
-            function_name=expense_delete_function_id,
-            runtime=_lambda.Runtime.PYTHON_3_12,
-            code=_lambda.Code.from_asset(FUNCTION_CODE_ROOT_PATH),
-            handler=get_function_handler_path(
-                feature=Feature.EXPENSE,
-                action=Action.DELETE,
-            ),
-            layers=[self.python_layer],
-            role=self.create_function_role(
-                f"{Feature.EXPENSE.value}-{Action.DELETE.value}",
-                [database_stack.reader_writer_policy],
-            ),
-            environment=self.GLOBAL_ENVIRONMENT,
-        )
-
-        # LIST EXPENSES
-        expense_list_function_id = get_function_name(
-            name=Feature.EXPENSE.value,
-            feature=Feature.EXPENSE,
-            action=Action.LIST,
-        )
-        self.expense_list_function = _lambda.Function(
-            self,
-            expense_list_function_id,
-            function_name=expense_list_function_id,
-            runtime=_lambda.Runtime.PYTHON_3_12,
-            code=_lambda.Code.from_asset(FUNCTION_CODE_ROOT_PATH),
-            handler=get_function_handler_path(
-                feature=Feature.EXPENSE,
-                action=Action.LIST,
-            ),
-            layers=[self.python_layer],
-            role=self.create_function_role(
-                f"{Feature.EXPENSE.value}-{Action.LIST.value}",
+                f"{Feature.FASTAPI.value}-{Action.MAIN.value}",
                 [database_stack.reader_writer_policy],
             ),
             environment=self.GLOBAL_ENVIRONMENT,

@@ -1,4 +1,4 @@
-from shared.config import APP_NAME, FUNCTION_CODE_PATH, STAGE, TABLE_NAME_MAIN
+from shared.config import APP_NAME, STAGE, TABLE_NAME_MAIN
 from shared.models.actions import Action
 from shared.models.features import Feature
 
@@ -12,10 +12,6 @@ def compose(values: list[str | None]) -> str:
 
 def get_function_name(name: str, feature: Feature, action: Action) -> str:
     return compose([APP_NAME, STAGE, "function", feature.value, name, action.value])
-
-
-def get_function_handler_path(feature: Feature, action: Action) -> str:
-    return f"{FUNCTION_CODE_PATH}.{feature.value}.{action.value}.handler"
 
 
 def get_layer_name(name: str) -> str:
