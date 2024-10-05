@@ -21,6 +21,7 @@ pytest = "^8.3.3"
 pytest-sugar = "^1.0.0"
 moto = {extras = ["all"], version = "^5.0.16"}
 pytest-cov = "^5.0.0"
+fastapi = {extras = ["standard"], version = "^0.115.0"}
 
 [build-system]
 requires = ["poetry-core"]
