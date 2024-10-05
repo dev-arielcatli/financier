@@ -4,9 +4,9 @@ from mangum import Mangum
 app = FastAPI()
 
 
-@app.get("/expenses")
+@app.get("/")
 async def root():
     return {"message": "Hello World"}
 
 
-handler = Mangum(app, lifespan="off")
+handler = Mangum(app, lifespan="off", api_gateway_base_path="/api")
