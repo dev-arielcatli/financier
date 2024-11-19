@@ -26,47 +26,38 @@ I wanted to leverage the use of OpenAI models to create an assistant that will:
 6. ⛰️ Set financial goals.
 7. 👨🏽 Ask the assistant about your finances.
 
-## ⚙️ Installation
-
-This repository is a mono-repo. It has two parts:
-
-1. `api` which contains the AWS-based API (infrastructure and business logic).
-2. `application` is the Angular-based application code.
-
-You can go to the directories and find their own `README.md` for their own installation instructions.
-
 ## 🛣️ Roadmap
 
 ### Phase 1
 
 Initial setup.
 
-- ✅ Initialize project structure
-- ✅ Setup project
+- Initialize project structure
+- Setup project
 - Setup tests
 
 ### Phase 2
 
 Simple proof of concept for data management.
 
-- ✅ Data modelling
-  - ✅ Expense
-- ✅ Database stack
-  - ✅ DynamoDB setup
-- ✅ API stack
-  - ✅ Create
-  - ✅ Read
-  - ✅ List
-  - ✅ Update
-  - ✅ Delete
+- Data modelling
+  - Expense
+- Database stack
+  - DynamoDB setup
+- API stack
+  - Create
+  - Read
+  - List
+  - Update
+  - Delete
 - Lambda stack
-  - ✅ Setup lambda layers
+  - Setup lambda layers
   - Create lambda layer creation script
-  - ✅ Create
-  - ✅ List
-  - ✅ Read
-  - ✅ Update
-  - ✅ Delete
+  - Create
+  - List
+  - Read
+  - Update
+  - Delete
 - Convert function creations to use YAML loading
 
 ### Phase 3
