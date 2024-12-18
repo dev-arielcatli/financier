@@ -1,1 +1,70 @@
-<p>expense works!</p>
+<div class="container">
+  <section class="header">
+    <h1>Expense</h1>
+  </section>
+  <main>
+    <form [formGroup]="expenseForm">Form</form>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        [formControl]="expenseForm.controls.name"
+        placeholder="Name"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        [formControl]="expenseForm.controls.description"
+        placeholder="Description"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Quantity</mat-label>
+      <input
+        matInput
+        type="number"
+        [formControl]="expenseForm.controls.quantity"
+        placeholder="Quantity"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Amount</mat-label>
+      <input
+        matInput
+        type="number"
+        [formControl]="expenseForm.controls.amount"
+        placeholder="Amount"
+      />
+    </mat-form-field>
+    <!-- <mat-form-field>
+      <mat-label>Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [formControl]="expenseForm.controls.date"
+        placeholder="Choose a date"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field> -->
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <input
+        matInput
+        [formControl]="expenseForm.controls.address"
+        placeholder="Address"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tags</mat-label>
+      <input
+        matInput
+        [formControl]="expenseForm.controls.tags"
+        placeholder="Tags"
+      />
+    </mat-form-field>
+  </main>
+  <section class="footer"></section>
+</div>
