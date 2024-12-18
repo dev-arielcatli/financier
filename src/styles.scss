@@ -1,4 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@use "app/styles/financier_theme" as *;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+  color-scheme: light dark;
+  @include mat.theme(
+    (
+      color: (
+        primary: $primary-palette,
+        tertiary: $tertiary-palette,
+      ),
+      typography: (
+        plain-family: "Open Sans",
+        brand-family: "Quicksand",
+      ),
+      density: 0,
+    )
+  );
+} /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+}

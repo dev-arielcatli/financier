@@ -1,14 +1,14 @@
-<mat-sidenav-container class="app-container">
+<mat-sidenav-container class="app-container mat-typography">
   <mat-sidenav
-    class="app-sidenav"
+    class="mat-typography app-sidenav"
     role="navigation"
     mode="side"
     [opened]="isSideNavOpen()"
   >
-    Sidenav
+    <p class="mat-typography">Sidenav</p>
   </mat-sidenav>
 
   <mat-sidenav-content role="main">
-    <!-- <button (click)="toggleSideNav()">Toggle</button> -->
+    <button (click)="toggleSideNav()">Toggle</button>
   </mat-sidenav-content>
 </mat-sidenav-container>
