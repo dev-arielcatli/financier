@@ -30,3 +30,15 @@ body {
   margin: 0;
   font-family: "Open Sans", "Helvetica Neue", sans-serif;
 }
+
+h1 {
+  font-size: var(--mat-sys-headline-large-size);
+}
+
+h2 {
+  font-size: var(--mat-sys-headline-medium-size);
+}
+
+h3 {
+  font-size: var(--mat-sys-headline-small-size);
+}
