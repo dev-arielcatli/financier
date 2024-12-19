@@ -3,10 +3,18 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Expense } from '../expense.model';
+import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'fn-expense-form',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogActions,
+    MatButtonModule,
+  ],
   templateUrl: './expense-form.component.html',
   styleUrl: './expense-form.component.scss',
 })
