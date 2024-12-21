@@ -2,14 +2,22 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Expense, SafeDisplayExpense } from '../expense.model';
+import { SafeDisplayExpense } from '../expense.model';
+import { MatIconModule } from '@angular/material/icon';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
-  MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import {
+  MatChipEditedEvent,
+  MatChipInputEvent,
+  MatChipsModule,
+} from '@angular/material/chips';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'fn-expense-form',
@@ -19,6 +27,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatDialogActions,
     MatButtonModule,
+    MatIconModule,
+    MatChipsModule,
+    CommonModule,
   ],
   templateUrl: './expense-form.component.html',
   styleUrl: './expense-form.component.scss',
@@ -40,13 +51,20 @@ export class ExpenseFormComponent {
     createdAt: [''],
     updatedAt: [''],
     address: [''],
-    tags: [['']],
+    tags: [[]],
   });
+
+  // CHIPS
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   constructor() {
     if (this.dialogData) {
       this.expenseForm.patchValue(this.dialogData);
     }
+  }
+
+  get tags(): string[] {
+    return this.expenseForm.value.tags || [];
   }
 
   onSave(): void {
@@ -57,5 +75,23 @@ export class ExpenseFormComponent {
 
   onCancel(): void {
     this.expenseDialogRef.close();
+  }
+
+  addTag(event: MatChipInputEvent): void {
+    const newTag = (event.value || '').trim();
+    if (newTag) {
+      this.expenseForm.controls.tags.patchValue(
+        // TODO: Fix issue with this model
+        this.tags.concat(newTag) as any,
+      );
+    }
+    event.chipInput!.clear();
+  }
+
+  removeTag(tag: string): void {
+    this.expenseForm.controls.tags.patchValue(
+      // TODO: Fix issue with this model
+      this.tags.filter((t) => t !== tag) as any,
+    );
   }
 }

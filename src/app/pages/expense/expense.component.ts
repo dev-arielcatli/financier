@@ -135,8 +135,9 @@ export class ExpenseComponent implements AfterViewInit {
   }
 
   onRowClick(expense: Expense): void {
-    this.expenseDialog.open(ExpenseFormComponent, {
+    this.expenseDialogRef = this.expenseDialog.open(ExpenseFormComponent, {
       data: expense,
     });
+    this.subscribeToExpenseDialogClose();
   }
 }

@@ -21,5 +21,6 @@ export type SafeDisplayExpense = Readonly<{
   createdAt: string;
   updatedAt: string;
   address: string;
-  tags: string[];
+  // TODO: Forms have issues with this model
+  tags: any;
 }>;

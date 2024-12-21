@@ -51,7 +51,23 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Tags</mat-label>
-        <input matInput formControlName="tags" placeholder="Tags" />
+        <mat-chip-grid #chipGrid>
+          <mat-chip-row
+            *ngFor="let tag of tags"
+            [editable]="true"
+            (removed)="removeTag(tag)"
+          >
+            {{ tag }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input
+            [matChipInputFor]="chipGrid"
+            [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="addTag($event)"
+          />
+        </mat-chip-grid>
       </mat-form-field>
     </div>
   </form>
