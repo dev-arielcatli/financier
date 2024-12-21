@@ -11,6 +11,8 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -33,6 +35,8 @@ import { ShortenPipe } from '../../shared/shortener.pipe';
     MatTableModule,
     MatPaginatorModule,
     ShortenPipe,
+    MatButtonModule,
+    MatIconModule,
   ],
   templateUrl: './expense.component.html',
   styleUrl: './expense.component.scss',

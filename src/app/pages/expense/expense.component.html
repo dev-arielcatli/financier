@@ -3,7 +3,14 @@
     <h1>Expense</h1>
   </section>
   <main>
-    <button (click)="onAddExpense()">Add Expense</button>
+    <div class="actions flex flex-row-reverse">
+      <div class="button-container">
+        <button mat-fab extended (click)="onAddExpense()">
+          <mat-icon>add</mat-icon>
+          Add Expense
+        </button>
+      </div>
+    </div>
     <table mat-table [dataSource]="expenseDataSource">
       <ng-container
         *ngFor="let column of EXPENSE_COLUMNS"
