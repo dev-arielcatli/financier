@@ -8,9 +8,14 @@
     <p class="mat-typography">Sidenav</p>
   </mat-sidenav>
 
-  <mat-sidenav-content role="main">
-    <button (click)="toggleSideNav()">Toggle</button>
-    <router-outlet>
-    </router-outlet>
+  <mat-sidenav-content role="main" class="px-4 py-4">
+    <section class="header flex">
+      <div class="side-toggle">
+        <button mat-icon-button (click)="toggleSideNav()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </section>
+    <router-outlet> </router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
