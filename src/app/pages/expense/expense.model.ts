@@ -4,9 +4,9 @@ export type Expense = Readonly<{
   description: string;
   quantity: number;
   amount: number;
-  date: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  date: Date | string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
   address: string;
   tags: string[];
 }>;

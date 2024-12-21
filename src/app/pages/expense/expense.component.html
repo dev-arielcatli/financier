@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container p-4">
   <section class="header">
     <h1>Expense</h1>
   </section>
@@ -6,15 +6,19 @@
     <button (click)="onAddExpense()">Add Expense</button>
     <table mat-table [dataSource]="expenseDataSource">
       <ng-container
-        *ngFor="let column of expenseColumns"
+        *ngFor="let column of EXPENSE_COLUMNS"
         [matColumnDef]="column"
       >
-        <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-        <td mat-cell *matCellDef="let expense">{{ expense[column] }}</td>
+        <th class="font-bold" mat-header-cell *matHeaderCellDef>
+          {{ column | uppercase }}
+        </th>
+        <td mat-cell *matCellDef="let expense">
+          {{ expense[column] | shorten: 75 : "..." }}
+        </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="expenseColumns"></tr>
-      <tr mat-row *matRowDef="let myRowData; columns: expenseColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="EXPENSE_COLUMNS"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: EXPENSE_COLUMNS"></tr>
     </table>
     <mat-paginator
       [length]="100"

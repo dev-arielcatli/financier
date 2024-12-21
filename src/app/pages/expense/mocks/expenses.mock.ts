@@ -4,7 +4,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '1',
     name: 'Tender Juicy Hotdog',
-    description: 'Tender Juicy Hotdog',
+    description:
+      'Tender Juicy Hotdog is a popular snack known for its delicious taste and juicy texture. Perfect for quick meals or snacks.',
     quantity: 1,
     amount: 10,
     date: new Date(),
@@ -16,7 +17,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '2',
     name: 'Coke',
-    description: 'Coke',
+    description:
+      'Coke is a refreshing carbonated soft drink enjoyed worldwide. It pairs well with various meals and snacks.',
     quantity: 1,
     amount: 15,
     date: new Date(),
@@ -28,7 +30,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '3',
     name: 'Pancit Canton',
-    description: 'Pancit Canton',
+    description:
+      'Pancit Canton is a Filipino noodle dish that is both flavorful and satisfying. It is often served during celebrations.',
     quantity: 1,
     amount: 12,
     date: new Date(),
@@ -40,7 +43,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '4',
     name: 'Dishwashing Liquid',
-    description: 'Dishwashing Liquid',
+    description:
+      'Dishwashing Liquid is essential for cleaning dishes and utensils. It effectively removes grease and food residues.',
     quantity: 1,
     amount: 25,
     date: new Date(),
@@ -52,7 +56,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '5',
     name: 'Laundry Detergent',
-    description: 'Laundry Detergent',
+    description:
+      'Laundry Detergent is used for washing clothes, leaving them clean and fresh. It is suitable for both hand and machine washing.',
     quantity: 1,
     amount: 30,
     date: new Date(),
@@ -64,7 +69,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '6',
     name: 'Floor Cleaner',
-    description: 'Floor Cleaner',
+    description:
+      'Floor Cleaner is designed to clean and sanitize various types of flooring. It leaves a pleasant fragrance after use.',
     quantity: 1,
     amount: 20,
     date: new Date(),
@@ -76,7 +82,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '7',
     name: 'Glass Cleaner',
-    description: 'Glass Cleaner',
+    description:
+      'Glass Cleaner provides a streak-free shine to windows and mirrors. It effectively removes dirt and smudges.',
     quantity: 1,
     amount: 18,
     date: new Date(),
@@ -88,7 +95,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '8',
     name: 'Toilet Cleaner',
-    description: 'Toilet Cleaner',
+    description:
+      'Toilet Cleaner is essential for maintaining a hygienic bathroom. It removes stains and kills germs effectively.',
     quantity: 1,
     amount: 22,
     date: new Date(),
@@ -100,7 +108,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '9',
     name: 'Bleach',
-    description: 'Bleach',
+    description:
+      'Bleach is a powerful cleaning agent used for whitening clothes and disinfecting surfaces. It is highly effective against germs.',
     quantity: 1,
     amount: 15,
     date: new Date(),
@@ -112,7 +121,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '10',
     name: 'Multi-purpose Cleaner',
-    description: 'Multi-purpose Cleaner',
+    description:
+      'Multi-purpose Cleaner is versatile and can be used on various surfaces. It cleans, disinfects, and leaves a fresh scent.',
     quantity: 1,
     amount: 28,
     date: new Date(),
@@ -124,7 +134,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '11',
     name: 'Shampoo',
-    description: 'Shampoo',
+    description:
+      'Shampoo is used for washing hair, leaving it clean and fragrant. It is suitable for daily use and various hair types.',
     quantity: 1,
     amount: 50,
     date: new Date(),
@@ -136,7 +147,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '12',
     name: 'Conditioner',
-    description: 'Conditioner',
+    description:
+      'Conditioner is applied after shampoo to moisturize and detangle hair. It leaves hair soft, smooth, and manageable.',
     quantity: 1,
     amount: 45,
     date: new Date(),
@@ -148,7 +160,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '13',
     name: 'Toothpaste',
-    description: 'Toothpaste',
+    description:
+      'Toothpaste is essential for oral hygiene, helping to clean teeth and freshen breath. It is used daily for best results.',
     quantity: 1,
     amount: 25,
     date: new Date(),
@@ -160,7 +173,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '14',
     name: 'Toothbrush',
-    description: 'Toothbrush',
+    description:
+      'Toothbrush is used with toothpaste to clean teeth and gums. It is recommended to replace it every three months.',
     quantity: 1,
     amount: 20,
     date: new Date(),
@@ -172,7 +186,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '15',
     name: 'Soap',
-    description: 'Soap',
+    description:
+      'Soap is used for washing hands and body, removing dirt and bacteria. It comes in various scents and formulations.',
     quantity: 1,
     amount: 15,
     date: new Date(),
@@ -184,7 +199,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '16',
     name: 'Body Wash',
-    description: 'Body Wash',
+    description:
+      'Body Wash is a liquid soap used for cleansing the body. It often contains moisturizing ingredients for soft skin.',
     quantity: 1,
     amount: 35,
     date: new Date(),
@@ -196,7 +212,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '17',
     name: 'Lotion',
-    description: 'Lotion',
+    description:
+      'Lotion is applied to the skin to moisturize and prevent dryness. It is available in various formulations for different skin types.',
     quantity: 1,
     amount: 60,
     date: new Date(),
@@ -208,7 +225,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '18',
     name: 'Deodorant',
-    description: 'Deodorant',
+    description:
+      'Deodorant is used to prevent body odor and keep you feeling fresh. It is available in various scents and forms.',
     quantity: 1,
     amount: 40,
     date: new Date(),
@@ -220,7 +238,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '19',
     name: 'Hand Sanitizer',
-    description: 'Hand Sanitizer',
+    description:
+      'Hand Sanitizer is used to disinfect hands when soap and water are not available. It is convenient for on-the-go use.',
     quantity: 1,
     amount: 25,
     date: new Date(),
@@ -232,7 +251,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '20',
     name: 'Face Wash',
-    description: 'Face Wash',
+    description:
+      'Face Wash is used to cleanse the face, removing dirt and oil. It is formulated to be gentle on the skin.',
     quantity: 1,
     amount: 30,
     date: new Date(),
@@ -244,7 +264,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '21',
     name: 'Shaving Cream',
-    description: 'Shaving Cream',
+    description:
+      'Shaving Cream is applied before shaving to soften hair and protect the skin. It helps achieve a smooth shave.',
     quantity: 1,
     amount: 35,
     date: new Date(),
@@ -256,7 +277,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '22',
     name: 'Razor',
-    description: 'Razor',
+    description:
+      'Razor is used for shaving hair from the skin. It is available in disposable and reusable forms.',
     quantity: 1,
     amount: 50,
     date: new Date(),
@@ -268,7 +290,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '23',
     name: 'Hair Gel',
-    description: 'Hair Gel',
+    description:
+      'Hair Gel is used to style and hold hair in place. It provides a firm hold and can be used for various hairstyles.',
     quantity: 1,
     amount: 25,
     date: new Date(),
@@ -280,7 +303,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '24',
     name: 'Hair Spray',
-    description: 'Hair Spray',
+    description:
+      'Hair Spray is used to set hairstyles and provide a long-lasting hold. It helps maintain the style throughout the day.',
     quantity: 1,
     amount: 30,
     date: new Date(),
@@ -292,7 +316,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '25',
     name: 'Mouthwash',
-    description: 'Mouthwash',
+    description:
+      'Mouthwash is used to rinse the mouth, helping to kill bacteria and freshen breath. It is used after brushing and flossing.',
     quantity: 1,
     amount: 20,
     date: new Date(),
@@ -304,7 +329,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '26',
     name: 'Floss',
-    description: 'Floss',
+    description:
+      'Floss is used to clean between teeth, removing plaque and food particles. It is an essential part of oral hygiene.',
     quantity: 1,
     amount: 15,
     date: new Date(),
@@ -316,7 +342,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '27',
     name: 'Cotton Swabs',
-    description: 'Cotton Swabs',
+    description:
+      'Cotton Swabs are used for various purposes, including cleaning ears and applying makeup. They are versatile and handy.',
     quantity: 1,
     amount: 10,
     date: new Date(),
@@ -328,7 +355,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '28',
     name: 'Tissue Paper',
-    description: 'Tissue Paper',
+    description:
+      'Tissue Paper is used for personal hygiene and cleaning. It is soft and absorbent, making it ideal for various uses.',
     quantity: 1,
     amount: 5,
     date: new Date(),
@@ -340,7 +368,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '29',
     name: 'Hand Soap',
-    description: 'Hand Soap',
+    description:
+      'Hand Soap is used for washing hands, removing dirt and germs. It is available in liquid and bar forms.',
     quantity: 1,
     amount: 15,
     date: new Date(),
@@ -352,7 +381,8 @@ export const mockExpenses: Expense[] = [
   {
     id: '30',
     name: 'Face Mask',
-    description: 'Face Mask',
+    description:
+      'Face Mask is used for skincare, providing deep cleansing and hydration. It is available in various types for different skin needs.',
     quantity: 1,
     amount: 20,
     date: new Date(),
