@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
 
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { ShortenPipe } from '../../shared/shortener.pipe';
+import { MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'fn-expense',
