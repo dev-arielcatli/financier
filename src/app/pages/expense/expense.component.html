@@ -25,7 +25,12 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="EXPENSE_COLUMNS"></tr>
-      <tr mat-row *matRowDef="let myRowData; columns: EXPENSE_COLUMNS"></tr>
+      <tr
+        mat-row
+        class="cursor-pointer"
+        *matRowDef="let row; columns: EXPENSE_COLUMNS"
+        (click)="onRowClick(row)"
+      ></tr>
     </table>
     <mat-paginator
       [length]="100"

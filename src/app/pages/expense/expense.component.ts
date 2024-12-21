@@ -15,9 +15,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 import { MatInputModule } from '@angular/material/input';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
-import { Expense } from './expense.model';
+import { Expense, SafeDisplayExpense } from './expense.model';
 import { mockExpenses } from './mocks/expenses.mock';
 import { CommonModule } from '@angular/common';
 
@@ -38,6 +42,7 @@ import { MatSortModule } from '@angular/material/sort';
     ShortenPipe,
     MatButtonModule,
     MatIconModule,
+    MatSortModule,
   ],
   templateUrl: './expense.component.html',
   styleUrl: './expense.component.scss',
@@ -46,6 +51,7 @@ export class ExpenseComponent implements AfterViewInit {
   @ViewChild(MatPaginator) expenseTablePaginator!: MatPaginator;
 
   expenseDialog = inject(MatDialog);
+  expenseDialogRef!: MatDialogRef<ExpenseFormComponent>;
 
   EXPENSE_COLUMNS: string[] = [
     'name',
@@ -56,13 +62,15 @@ export class ExpenseComponent implements AfterViewInit {
   ];
 
   private rawExpenses = signal<Expense[]>(mockExpenses);
-  expenses: Signal<Expense[]> = computed(() => {
+  expenses: Signal<SafeDisplayExpense[]> = computed(() => {
     const formattedExpenses = this.formatExpenses(this.rawExpenses());
-    this.expenseDataSource = new MatTableDataSource<Expense>(formattedExpenses);
+    this.expenseDataSource = new MatTableDataSource<SafeDisplayExpense>(
+      formattedExpenses,
+    );
     return formattedExpenses;
   });
 
-  expenseDataSource = new MatTableDataSource<Expense>([]);
+  expenseDataSource = new MatTableDataSource<SafeDisplayExpense>([]);
 
   ngAfterViewInit(): void {
     // TODO: computed() signals are only computed when they are accessed.
@@ -71,11 +79,11 @@ export class ExpenseComponent implements AfterViewInit {
   }
 
   onAddExpense(): void {
-    console.log('Add Expense');
-    this.expenseDialog.open(ExpenseFormComponent, {});
+    this.expenseDialogRef = this.expenseDialog.open(ExpenseFormComponent, {});
+    this.subscribeToExpenseDialogClose();
   }
 
-  private formatExpenses(expenses: Expense[]): Expense[] {
+  private formatExpenses(expenses: Expense[]): SafeDisplayExpense[] {
     return expenses.map((expense) => {
       return {
         ...expense,
@@ -107,6 +115,28 @@ export class ExpenseComponent implements AfterViewInit {
           hour12: true,
         }),
       };
+    });
+  }
+
+  private onExpenseDialogClose(expense: Expense): void {
+    if (expense) {
+      if (expense.id) {
+        console.log('Update expense', expense);
+      } else {
+        console.log('Create expense', expense);
+      }
+    }
+  }
+
+  subscribeToExpenseDialogClose(): void {
+    this.expenseDialogRef.afterClosed().subscribe((payload) => {
+      this.onExpenseDialogClose(payload);
+    });
+  }
+
+  onRowClick(expense: Expense): void {
+    this.expenseDialog.open(ExpenseFormComponent, {
+      data: expense,
     });
   }
 }

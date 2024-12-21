@@ -1,9 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Expense } from '../expense.model';
-import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
+import { Expense, SafeDisplayExpense } from '../expense.model';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -21,16 +26,36 @@ import { MatButtonModule } from '@angular/material/button';
 export class ExpenseFormComponent {
   private formBuilder = inject(FormBuilder);
 
-  expenseForm = this.formBuilder.group<Expense>({
-    id: '',
-    name: '',
-    description: '',
-    quantity: 0,
-    amount: 0,
-    date: new Date(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    address: '',
-    tags: [],
+  expenseDialogRef = inject(MatDialogRef<ExpenseFormComponent>);
+
+  dialogData: SafeDisplayExpense = inject(MAT_DIALOG_DATA);
+
+  expenseForm = this.formBuilder.group({
+    id: [''],
+    name: ['', Validators.required],
+    description: [''],
+    quantity: [1],
+    amount: [0],
+    date: [''],
+    createdAt: [''],
+    updatedAt: [''],
+    address: [''],
+    tags: [['']],
   });
+
+  constructor() {
+    if (this.dialogData) {
+      this.expenseForm.patchValue(this.dialogData);
+    }
+  }
+
+  onSave(): void {
+    if (this.expenseForm.valid) {
+      this.expenseDialogRef.close(this.expenseForm.value);
+    }
+  }
+
+  onCancel(): void {
+    this.expenseDialogRef.close();
+  }
 }

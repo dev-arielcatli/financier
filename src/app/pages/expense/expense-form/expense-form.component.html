@@ -56,7 +56,9 @@
     </div>
   </form>
   <mat-dialog-actions>
-    <button mat-flat-button>Save</button>
-    <button mat-stroked-button>Cancel</button>
+    <button mat-flat-button (click)="onSave()" [disabled]="expenseForm.invalid">
+      Save
+    </button>
+    <button mat-stroked-button (click)="onCancel()">Cancel</button>
   </mat-dialog-actions>
 </div>
