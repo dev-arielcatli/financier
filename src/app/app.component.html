@@ -5,15 +5,18 @@
     mode="side"
     [opened]="isSideNavOpen()"
   >
-    <p class="mat-typography">Sidenav</p>
+    <fn-sidenav></fn-sidenav>
   </mat-sidenav>
 
   <mat-sidenav-content role="main" class="px-4 py-4">
-    <section class="header flex">
+    <section class="header flex flex-row justify-between">
       <div class="side-toggle">
         <button mat-icon-button (click)="toggleSideNav()">
           <mat-icon>menu</mat-icon>
         </button>
+      </div>
+      <div class="logo px-4">
+        <p class="logo-text text-3xl font-bold">financier</p>
       </div>
     </section>
     <router-outlet> </router-outlet>
