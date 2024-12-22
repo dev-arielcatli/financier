@@ -7,6 +7,7 @@ export const NAVIGATION_ITEMS: Navigation[] = [
     path: '',
     active: false,
     icon: 'home',
+    disabled: true,
   },
   {
     label: 'Income',
@@ -14,6 +15,7 @@ export const NAVIGATION_ITEMS: Navigation[] = [
     path: 'income',
     active: false,
     icon: 'attach_money',
+    disabled: false,
   },
   {
     label: 'Expense',
@@ -21,6 +23,7 @@ export const NAVIGATION_ITEMS: Navigation[] = [
     path: 'expense',
     active: false,
     icon: 'money_off',
+    disabled: false,
   },
   {
     label: 'Budget',
@@ -28,6 +31,7 @@ export const NAVIGATION_ITEMS: Navigation[] = [
     path: 'budget',
     active: false,
     icon: 'account_balance_wallet',
+    disabled: true,
   },
   {
     label: 'Goal',
@@ -35,6 +39,7 @@ export const NAVIGATION_ITEMS: Navigation[] = [
     path: 'goal',
     active: false,
     icon: 'flag',
+    disabled: true,
   },
   {
     label: 'Report',
@@ -42,5 +47,6 @@ export const NAVIGATION_ITEMS: Navigation[] = [
     path: 'report',
     active: false,
     icon: 'bar_chart',
+    disabled: true,
   },
 ];

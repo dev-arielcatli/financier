@@ -1,9 +1,10 @@
 <div class="sidenav container flex flex-col space-y-8 px-8 py-8">
-  <mat-nav-list>
+  <mat-nav-list class="flex flex-col space-y-2">
     @for (item of NAVIGATION_ITEMS; track item) {
       <div class="navigation-item">
         <a
           mat-list-item
+          [disabled]="item.disabled"
           [routerLink]="item.path"
           [activated]="item.active"
           (click)="setActive(item)"

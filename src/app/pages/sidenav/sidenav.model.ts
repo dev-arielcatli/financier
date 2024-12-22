@@ -4,4 +4,5 @@ export type Navigation = Readonly<{
   path: string;
   active: boolean;
   icon: string;
+  disabled: boolean;
 }>;
