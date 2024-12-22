@@ -54,7 +54,7 @@
         <mat-chip-grid #chipGrid>
           <mat-chip-row
             *ngFor="let tag of tags"
-            [editable]="true"
+            [editable]="false"
             (removed)="removeTag(tag)"
           >
             {{ tag }}
