@@ -2,7 +2,13 @@
   <section class="header">
     <h1>Expense</h1>
   </section>
-  <main>
+  <main class="flex flex-col space-y-8">
+    <div class="charts">
+      <p class="py-4">{{ summaryMessage() }}</p>
+      <div class="chart-container">
+        <canvas #summaryChartCanvas id="duration-summary-canvas"></canvas>
+      </div>
+    </div>
     <div class="actions flex flex-row-reverse">
       <div class="button-container">
         <button mat-fab extended (click)="onAddExpense()">

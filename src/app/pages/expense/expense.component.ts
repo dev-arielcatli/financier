@@ -7,6 +7,7 @@ import {
   signal,
   effect,
   ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,6 +30,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { ShortenPipe } from '../../shared/shortener.pipe';
 import { MatSortModule } from '@angular/material/sort';
 
+import { Chart } from 'chart.js/auto';
+
 @Component({
   selector: 'fn-expense',
   imports: [
@@ -48,11 +51,26 @@ import { MatSortModule } from '@angular/material/sort';
   styleUrl: './expense.component.scss',
 })
 export class ExpenseComponent implements AfterViewInit {
-  @ViewChild(MatPaginator) expenseTablePaginator!: MatPaginator;
-
+  // DIALOGS
   expenseDialog = inject(MatDialog);
   expenseDialogRef!: MatDialogRef<ExpenseFormComponent>;
 
+  // SUMMARY
+  @ViewChild('summaryChartCanvas') summaryChartCanvas!: ElementRef;
+  summaryChart!: Chart;
+  summaryMessage = signal<string>(
+    'Manage your expenses in here and have insights with your spending.',
+  );
+
+  // TABLE
+  @ViewChild(MatPaginator)
+  private _expenseTablePaginator!: MatPaginator;
+  public get expenseTablePaginator(): MatPaginator {
+    return this._expenseTablePaginator;
+  }
+  public set expenseTablePaginator(value: MatPaginator) {
+    this._expenseTablePaginator = value;
+  }
   EXPENSE_COLUMNS: string[] = [
     'name',
     'description',
@@ -76,11 +94,43 @@ export class ExpenseComponent implements AfterViewInit {
     // TODO: computed() signals are only computed when they are accessed.
     this.expenses();
     this.expenseDataSource.paginator = this.expenseTablePaginator;
+    this.initializeChart();
   }
 
   onAddExpense(): void {
     this.expenseDialogRef = this.expenseDialog.open(ExpenseFormComponent, {});
     this.subscribeToExpenseDialogClose();
+  }
+
+  private initializeChart(): void {
+    this.summaryChart = new Chart(
+      (this.summaryChartCanvas as ElementRef<HTMLCanvasElement>).nativeElement,
+      {
+        type: 'line',
+        data: {
+          labels: Array.from(
+            { length: 21 },
+            (_, i) => new Date(2024, 11, 22 + i),
+          ).map((d) =>
+            new Date(d).toLocaleString('en-US', {
+              day: '2-digit',
+              month: 'short',
+            }),
+          ),
+          datasets: [
+            {
+              label: 'Your 3-week expenses',
+              data: [...Array(100).keys()].map(
+                (number) => Math.random() * 10000,
+              ),
+            },
+          ],
+        },
+        options: {
+          maintainAspectRatio: false,
+        },
+      },
+    );
   }
 
   private formatExpenses(expenses: Expense[]): SafeDisplayExpense[] {

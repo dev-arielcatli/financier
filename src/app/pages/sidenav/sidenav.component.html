@@ -5,7 +5,7 @@
         <a
           mat-list-item
           [disabled]="item.disabled"
-          [routerLink]="item.path"
+          [routerLink]="item.disabled ? null : item.path"
           [activated]="item.active"
           (click)="setActive(item)"
         >

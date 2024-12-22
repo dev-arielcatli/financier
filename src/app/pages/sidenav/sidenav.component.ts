@@ -15,6 +15,9 @@ export class SidenavComponent {
   NAVIGATION_ITEMS = [...NAVIGATION_ITEMS];
 
   setActive(item: Navigation) {
+    if (item.disabled) {
+      return;
+    }
     this.NAVIGATION_ITEMS = this.NAVIGATION_ITEMS.map((navItem) => {
       if (navItem.id === item.id) {
         return { ...navItem, active: true };
