@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   computed,
+  ElementRef,
   inject,
   Signal,
   signal,
@@ -27,6 +28,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { ShortenPipe } from '../../shared/shortener.pipe';
 import { MatSortModule } from '@angular/material/sort';
 import { Income, SafeDisplayIncome } from './income.model';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'fn-income',
@@ -47,11 +49,19 @@ import { Income, SafeDisplayIncome } from './income.model';
   styleUrl: './income.component.scss',
 })
 export class IncomeComponent implements AfterViewInit {
-  @ViewChild(MatPaginator) incomeTablePaginator!: MatPaginator;
-
+  // DIALOG
   incomeDialog = inject(MatDialog);
   incomeDialogRef!: MatDialogRef<IncomeFormComponent>;
 
+  // SUMMARY
+  @ViewChild('incomeSummaryChartCanvas') incomeSummaryChartCanvas!: ElementRef;
+  summaryChart!: Chart;
+  summaryMessage = signal<string>(
+    'Manage your income in here and have insights with your assets.',
+  );
+
+  // TABLE
+  @ViewChild(MatPaginator) incomeTablePaginator!: MatPaginator;
   INCOME_COLUMNS: string[] = [
     'name',
     'description',
@@ -75,11 +85,45 @@ export class IncomeComponent implements AfterViewInit {
     // TODO: computed() signals are only computed when they are accessed.
     this.incomes();
     this.incomeDataSource.paginator = this.incomeTablePaginator;
+    this.initializeChart();
   }
 
   onAddIncome(): void {
     this.incomeDialogRef = this.incomeDialog.open(IncomeFormComponent, {});
     this.subscribeToIncomeDialogClose();
+  }
+
+  private initializeChart(): void {
+    this.summaryChart = new Chart(
+      (
+        this.incomeSummaryChartCanvas as ElementRef<HTMLCanvasElement>
+      ).nativeElement,
+      {
+        type: 'line',
+        data: {
+          labels: Array.from(
+            { length: 21 },
+            (_, i) => new Date(2024, 11, 22 + i),
+          ).map((d) =>
+            new Date(d).toLocaleString('en-US', {
+              day: '2-digit',
+              month: 'short',
+            }),
+          ),
+          datasets: [
+            {
+              label: 'Your 3-week income',
+              data: [...Array(100).keys()].map(
+                (number) => Math.random() * 10000,
+              ),
+            },
+          ],
+        },
+        options: {
+          maintainAspectRatio: false,
+        },
+      },
+    );
   }
 
   private formatIncomes(incomes: Income[]): SafeDisplayIncome[] {
