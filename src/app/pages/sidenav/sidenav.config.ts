@@ -5,7 +5,7 @@ export const NAVIGATION_ITEMS: Navigation[] = [
     label: 'Home',
     id: 'home',
     path: '',
-    active: true,
+    active: false,
     icon: 'home',
   },
   {
