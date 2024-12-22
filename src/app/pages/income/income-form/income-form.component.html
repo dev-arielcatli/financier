@@ -1,0 +1,100 @@
+<div class="container p-4">
+  <h2 mat-dialog-title>Income</h2>
+  <form [formGroup]="incomeForm" class="py-4">
+    <div class="controls container mx-auto flex max-w-fit flex-col">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          placeholder="Description"
+        ></textarea>
+      </mat-form-field>
+      <div class="total-controls mx-auto flex flex-row space-x-4">
+        <mat-form-field>
+          <mat-label>Quantity</mat-label>
+          <input
+            matInput
+            type="number"
+            [formControl]="incomeForm.controls.quantity"
+            placeholder="Quantity"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Amount</mat-label>
+          <input
+            matInput
+            type="number"
+            [formControl]="incomeForm.controls.amount"
+            placeholder="Amount"
+          />
+        </mat-form-field>
+      </div>
+      <!-- <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [formControl]="incomeForm.controls.date"
+              placeholder="Choose a date"
+            />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field> -->
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" placeholder="Address" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Sources</mat-label>
+        <mat-chip-grid #chipGridSource>
+          <mat-chip-row
+            *ngFor="let source of sources"
+            [editable]="false"
+            (removed)="removeSources(source)"
+          >
+            {{ source }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input
+            [matChipInputFor]="chipGridSource"
+            [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="addSource($event)"
+          />
+        </mat-chip-grid>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tags</mat-label>
+        <mat-chip-grid #chipGrid>
+          <mat-chip-row
+            *ngFor="let tag of tags"
+            [editable]="false"
+            (removed)="removeTag(tag)"
+          >
+            {{ tag }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input
+            [matChipInputFor]="chipGrid"
+            [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="addTag($event)"
+          />
+        </mat-chip-grid>
+      </mat-form-field>
+    </div>
+  </form>
+  <mat-dialog-actions>
+    <button mat-flat-button (click)="onSave()" [disabled]="incomeForm.invalid">
+      Save
+    </button>
+    <button mat-stroked-button (click)="onCancel()">Cancel</button>
+  </mat-dialog-actions>
+</div>
