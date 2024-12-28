@@ -60,7 +60,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.devs.ts"
+                  "with": "src/environments/environment.dev.ts"
                 }
               ]
             }
@@ -77,7 +77,10 @@
               "buildTarget": "financier:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
