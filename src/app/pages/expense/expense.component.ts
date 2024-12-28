@@ -31,6 +31,7 @@ import { ShortenPipe } from '../../shared/shortener.pipe';
 import { MatSortModule } from '@angular/material/sort';
 
 import { Chart } from 'chart.js/auto';
+import { ExpenseApiService } from './expense.api.service';
 
 @Component({
   selector: 'fn-expense',
@@ -51,6 +52,9 @@ import { Chart } from 'chart.js/auto';
   styleUrl: './expense.component.scss',
 })
 export class ExpenseComponent implements AfterViewInit {
+  // SERVICES
+  expenseApiService = inject(ExpenseApiService);
+
   // DIALOGS
   expenseDialog = inject(MatDialog);
   expenseDialogRef!: MatDialogRef<ExpenseFormComponent>;
