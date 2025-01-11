@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Expense } from './expense.model';
+import { Expense, NewExpense } from './expense.model';
 import { EndpointService } from '../../shared/service/endpoint.service';
 
 @Injectable({
@@ -30,5 +30,11 @@ export class ExpenseApiService {
         params: { user_id: userId },
       },
     );
+  }
+
+  addExpense(newExpense: NewExpense, userId: string): Observable<Expense> {
+    return this.httpClient.post<Expense>('/v1/expense', newExpense, {
+      params: { user_id: userId },
+    });
   }
 }

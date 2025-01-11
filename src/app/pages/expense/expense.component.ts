@@ -22,7 +22,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
-import { Expense, SafeDisplayExpense } from './expense.model';
+import { Expense, NewExpense, SafeDisplayExpense } from './expense.model';
 import { mockExpenses } from './mocks/expenses.mock';
 import { CommonModule } from '@angular/common';
 
@@ -185,12 +185,14 @@ export class ExpenseComponent implements AfterViewInit {
     });
   }
 
-  private onExpenseDialogClose(expense: Expense): void {
+  private onExpenseDialogClose(expense: Expense & NewExpense): void {
     if (expense) {
       if (expense.id) {
         console.log('Update expense', expense);
       } else {
-        console.log('Create expense', expense);
+        this.expenseApiService
+          .addExpense(expense as NewExpense, 'default')
+          .subscribe();
       }
     }
   }
