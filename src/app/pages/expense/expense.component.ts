@@ -33,6 +33,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { Chart } from 'chart.js/auto';
 import { ExpenseApiService } from './expense.api.service';
 
+import { toSignal } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
+
 @Component({
   selector: 'fn-expense',
   imports: [
@@ -83,20 +86,30 @@ export class ExpenseComponent implements AfterViewInit {
     'date',
   ];
 
-  private rawExpenses = signal<Expense[]>(mockExpenses);
-  expenses: Signal<SafeDisplayExpense[]> = computed(() => {
-    const formattedExpenses = this.formatExpenses(this.rawExpenses());
-    this.expenseDataSource = new MatTableDataSource<SafeDisplayExpense>(
-      formattedExpenses,
-    );
-    return formattedExpenses;
-  });
+  expenses = toSignal<Expense[]>(
+    this.expenseApiService.getExpenses().pipe(
+      tap((expenses) => {
+        if (!!expenses) {
+          const formattedExpenses = this.formatExpenses(expenses);
+          this.expenseDataSource = new MatTableDataSource<SafeDisplayExpense>(
+            formattedExpenses,
+          );
+        }
+      }),
+    ),
+  );
 
   expenseDataSource = new MatTableDataSource<SafeDisplayExpense>([]);
 
   ngAfterViewInit(): void {
-    // TODO: computed() signals are only computed when they are accessed.
-    this.expenses();
+    if (!!this.expenses()) {
+      const formattedExpenses = this.formatExpenses(
+        this.expenses() as Expense[],
+      );
+      this.expenseDataSource = new MatTableDataSource<SafeDisplayExpense>(
+        formattedExpenses,
+      );
+    }
     this.expenseDataSource.paginator = this.expenseTablePaginator;
     this.initializeChart();
   }

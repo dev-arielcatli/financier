@@ -1,8 +1,11 @@
 {
-  "/api": {
-    "target": "https://cohyxbmpgd.execute-api.us-west-2.amazonaws.com/dev",
+  "/v1": {
+    "target": "https://api.financier.arielcatli.com/v1",
     "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug"
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/v1": ""
+    }
   }
 }

@@ -12,18 +12,10 @@ export class ExpenseApiService {
   endpointService = inject(EndpointService);
   constructor() {}
 
-  getExpenses(userId: string): Observable<Expense> {
-    return this.httpClient.get<Expense>(
-      this.endpointService.buildEndpoint(
-        this.endpointService.EXPENSE_ENDPOINTS[
-          this.endpointService.API_ACTIONS.LIST
-        ],
-        {},
-      ),
-      {
-        params: { user_id: userId },
-      },
-    );
+  getExpenses(userId: string = 'default'): Observable<Expense[]> {
+    return this.httpClient.get<Expense[]>('/v1/expense', {
+      params: { user_id: userId },
+    });
   }
 
   getExpense(expenseId: string, userId: string): Observable<Expense> {

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Financier | arielcatli.com</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./favicon.ico.png" type="image/x-icon" />
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+        color: white;
+        background-color: #1f1f1f;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes blink {
+        from {
+          border-color: transparent;
+        }
+        to {
+          border-color: #fff;
+        }
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .typewriter {
+        display: inline-block;
+        padding: 0 15px;
+      }
+
+      .typewriter p {
+        display: inline-block;
+        overflow: hidden;
+        border-right: 2px solid #fff;
+        white-space: nowrap;
+        letter-spacing: 2px;
+        font-size: 0.75rem;
+        animation:
+          typing 1s steps(40, end),
+          blink 0.5s step-end 12 alternate;
+      }
+
+      .rotating-coin {
+        display: inline-block;
+        animation: rotate 2s linear infinite;
+        font-size: 3rem;
+      }
+
+      .links {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .links img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .attributions {
+        position: absolute;
+        bottom: 10px;
+        font-size: 0.5rem;
+      }
+
+      .attributions a {
+        color: white;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>financier</h1>
+    <span class="rotating-coin"> 🪙 </span>
+    <div class="typewriter">
+      <p>Your AI-powered personal finance manager.</p>
+    </div>
+    <div class="typewriter">
+      <p>Coming soon, January 2025.</p>
+    </div>
+    <div class="links">
+      <a href="https://github.com/dev-arielcatli/financier"
+        ><img
+          src="https://img.icons8.com/ios-filled/50/ffffff/github.png"
+          alt="GitHub"
+      /></a>
+      <a href="https://www.linkedin.com/in/arielcatli/"
+        ><img
+          src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png"
+          alt="LinkedIn"
+      /></a>
+    </div>
+    <div class="attributions">
+      <a href="https://www.flaticon.com/free-icons/coin" title="coin icons"
+        >Coin icons created by Freepik - Flaticon</a
+      >
+    </div>
+  </body>
+</html>

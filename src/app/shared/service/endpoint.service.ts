@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Endpoint } from './endpoint.model';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -19,28 +18,26 @@ export class EndpointService {
   API_KEY = 'api';
 
   EXPENSE_ENDPOINTS: Endpoint = {
-    [this.API_ACTIONS.GET]: `${this.API_KEY}/expense/{expenseId}`,
-    [this.API_ACTIONS.POST]: `${this.API_KEY}/expense/`,
-    [this.API_ACTIONS.PUT]: `${this.API_KEY}/expense/{expenseId}/`,
-    [this.API_ACTIONS.DELETE]: `${this.API_KEY}/expense/`,
-    [this.API_ACTIONS.LIST]: `${this.API_KEY}/expense/`,
+    [this.API_ACTIONS.GET]: `/expense/{expenseId}`,
+    [this.API_ACTIONS.POST]: `/expense/`,
+    [this.API_ACTIONS.PUT]: `/expense/{expenseId}/`,
+    [this.API_ACTIONS.DELETE]: `/expense/`,
+    [this.API_ACTIONS.LIST]: `/expense/`,
   };
 
   INCOME_ENDPOINTS: Endpoint = {
-    [this.API_ACTIONS.GET]: `${this.API_KEY}/income/{incomeId}`,
-    [this.API_ACTIONS.POST]: `${this.API_KEY}/income/`,
-    [this.API_ACTIONS.PUT]: `${this.API_KEY}/income/{incomeId}/`,
-    [this.API_ACTIONS.DELETE]: `${this.API_KEY}/income/`,
-    [this.API_ACTIONS.LIST]: `${this.API_KEY}/income/`,
+    [this.API_ACTIONS.GET]: `/income/{incomeId}`,
+    [this.API_ACTIONS.POST]: `/income/`,
+    [this.API_ACTIONS.PUT]: `/income/{incomeId}/`,
+    [this.API_ACTIONS.DELETE]: `/income/`,
+    [this.API_ACTIONS.LIST]: `/income/`,
   };
 
   buildEndpoint(endpoint: string, params: Record<string, string>): string {
-    const BASE_URL = environment.apiURL;
     let path = endpoint;
     Object.entries(params).forEach(([key, value]) => {
       path = path.replace(`{${key}}`, value);
     });
-
-    return `${BASE_URL}/${path}`;
+    return `/${path}`;
   }
 }
