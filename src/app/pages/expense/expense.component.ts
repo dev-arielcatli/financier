@@ -27,7 +27,6 @@ import {
   NewExpense,
   SafeDisplayExpense,
 } from '../../store/expense/expense.model';
-import { mockExpenses } from './mocks/expenses.mock';
 import { CommonModule } from '@angular/common';
 
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -39,6 +38,7 @@ import { Chart } from 'chart.js/auto';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ExpenseStoreFacadeService } from '../../store/expense/expense.store';
 import { RequestResult } from '@ngneat/elf-requests';
+import { FormatDatePipe } from '../../shared/data-formatter.pipe';
 
 @Component({
   selector: 'fn-expense',
@@ -51,6 +51,7 @@ import { RequestResult } from '@ngneat/elf-requests';
     MatTableModule,
     MatPaginatorModule,
     ShortenPipe,
+    FormatDatePipe,
     MatButtonModule,
     MatIconModule,
     MatSortModule,

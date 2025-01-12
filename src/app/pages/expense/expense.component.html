@@ -26,7 +26,11 @@
           {{ column | uppercase }}
         </th>
         <td mat-cell *matCellDef="let expense">
-          {{ expense[column] | shorten: 75 : "..." }}
+          {{
+            column === "date"
+              ? (expense[column] | formatDate)
+              : (expense[column] | shorten: 75 : "...")
+          }}
         </td>
       </ng-container>
 
