@@ -13,13 +13,13 @@ export type Expense = Readonly<{
 
 export type SafeDisplayExpense = Readonly<{
   id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
   name: string;
   description: string;
   quantity: number;
   amount: number;
-  date: string;
+  date: Date;
   address: string;
   // TODO: Forms have issues with this model
   tags: any;

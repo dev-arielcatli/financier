@@ -36,4 +36,10 @@ export class ExpenseApiService {
       params: { user_id: userId },
     });
   }
+
+  updateExpense(expense: Expense, userId: string): Observable<Expense> {
+    return this.httpClient.put<Expense>(`/v1/expense/${expense.id}`, expense, {
+      params: { user_id: userId },
+    });
+  }
 }

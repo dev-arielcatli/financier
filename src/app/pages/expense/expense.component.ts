@@ -165,33 +165,6 @@ export class ExpenseComponent implements AfterViewInit {
     return expenses.map((expense) => {
       return {
         ...expense,
-        date: new Date(expense.date).toLocaleString('en-US', {
-          weekday: 'long',
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric',
-          hour12: true,
-        }),
-        createdAt: new Date(expense.createdAt).toLocaleString('en-US', {
-          weekday: 'long',
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric',
-          hour12: true,
-        }),
-        updatedAt: new Date(expense.updatedAt).toLocaleString('en-US', {
-          weekday: 'long',
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric',
-          hour12: true,
-        }),
         total: expense.amount * expense.quantity,
       };
     });
@@ -199,8 +172,14 @@ export class ExpenseComponent implements AfterViewInit {
 
   private onExpenseDialogClose(expense: Expense & NewExpense): void {
     if (expense) {
+      console.log(expense);
       if (expense.id) {
-        console.log('Update expense', expense);
+        this.expenseStore
+          .updateExpense({
+            ...expense,
+            date: new Date(expense.date),
+          })
+          .subscribe();
       } else {
         this.expenseStore.addExpense(expense as NewExpense).subscribe();
       }

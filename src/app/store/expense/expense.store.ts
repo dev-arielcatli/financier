@@ -5,6 +5,7 @@ import {
   setEntities,
   selectAllEntities,
   addEntities,
+  upsertEntities,
 } from '@ngneat/elf-entities';
 import { Expense, NewExpense } from './expense.model';
 import { inject, Injectable } from '@angular/core';
@@ -52,6 +53,14 @@ export class ExpenseStoreFacadeService {
     return this.expenseAPIService.addExpense(expense, 'default').pipe(
       tap((expense) => {
         this.store.update(addEntities(expense));
+      }),
+    );
+  }
+
+  updateExpense(expense: Expense): Observable<Expense> {
+    return this.expenseAPIService.updateExpense(expense, 'default').pipe(
+      tap((expense) => {
+        this.store.update(upsertEntities(expense));
       }),
     );
   }

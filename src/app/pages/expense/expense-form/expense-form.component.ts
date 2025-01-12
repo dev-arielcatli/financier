@@ -47,9 +47,9 @@ export class ExpenseFormComponent {
     description: [''],
     quantity: [1],
     amount: [0],
-    date: [new Date().toISOString()],
-    createdAt: [''],
-    updatedAt: [''],
+    date: [new Date()],
+    createdAt: [new Date()],
+    updatedAt: [new Date()],
     address: [''],
     tags: [[]],
   });
