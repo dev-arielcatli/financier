@@ -87,6 +87,7 @@ export class ExpenseComponent implements AfterViewInit {
     'description',
     'quantity',
     'amount',
+    'total',
     'date',
   ];
 
@@ -149,9 +150,7 @@ export class ExpenseComponent implements AfterViewInit {
           datasets: [
             {
               label: 'Your 3-week expenses',
-              data: [...Array(100).keys()].map(
-                (number) => Math.random() * 10000,
-              ),
+              data: [...Array(100).keys()].map(() => Math.random() * 10000),
             },
           ],
         },
@@ -193,6 +192,7 @@ export class ExpenseComponent implements AfterViewInit {
           minute: 'numeric',
           hour12: true,
         }),
+        total: expense.amount * expense.quantity,
       };
     });
   }
@@ -202,9 +202,7 @@ export class ExpenseComponent implements AfterViewInit {
       if (expense.id) {
         console.log('Update expense', expense);
       } else {
-        // this.expenseApiService
-        //   .addExpense(expense as NewExpense, 'default')
-        //   .subscribe();
+        this.expenseStore.addExpense(expense as NewExpense).subscribe();
       }
     }
   }

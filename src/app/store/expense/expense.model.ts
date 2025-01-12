@@ -23,6 +23,7 @@ export type SafeDisplayExpense = Readonly<{
   address: string;
   // TODO: Forms have issues with this model
   tags: any;
+  total: number;
 }>;
 
 export type NewExpense = Readonly<{
