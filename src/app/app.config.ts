@@ -8,6 +8,9 @@ import {
 } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
+import { devTools } from '@ngneat/elf-devtools';
+
+devTools();
 
 export const appConfig: ApplicationConfig = {
   providers: [
