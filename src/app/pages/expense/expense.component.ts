@@ -107,7 +107,7 @@ export class ExpenseComponent implements AfterViewInit {
   });
 
   constructor() {
-    effect(this.subscribeTableToExpenseChange);
+    effect(this.setExpenseTableData);
   }
 
   expenseDataSource = new MatTableDataSource<SafeDisplayExpense>([]);
@@ -122,7 +122,7 @@ export class ExpenseComponent implements AfterViewInit {
     this.subscribeToExpenseDialogClose();
   }
 
-  private subscribeTableToExpenseChange = () => {
+  private setExpenseTableData = () => {
     this.expenseDataSource = new MatTableDataSource<SafeDisplayExpense>(
       this.expenses(),
     );
