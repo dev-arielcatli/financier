@@ -33,7 +33,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { ShortenPipe } from '../../shared/shortener.pipe';
 import { MatSortModule } from '@angular/material/sort';
 
-import { Chart } from 'chart.js/auto';
+import { Chart, ChartData } from 'chart.js/auto';
 
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ExpenseStoreFacadeService } from '../../store/expense/expense.store';
@@ -99,7 +99,9 @@ export class ExpenseComponent implements AfterViewInit {
   expenses = computed<SafeDisplayExpense[]>(() => {
     const entities = this.expenseEntities();
     if (entities?.isSuccess) {
-      return this.formatExpenses(entities.data || []);
+      return this.formatExpenses(entities.data || []).sort(
+        this.sortExpenseByDate,
+      );
     }
     return [];
   });
@@ -109,14 +111,23 @@ export class ExpenseComponent implements AfterViewInit {
   });
 
   constructor() {
-    effect(this.setExpenseTableData);
+    effect(() => {
+      this.setExpenseTableData();
+      this.recomputeChartData();
+    });
   }
 
   expenseDataSource = new MatTableDataSource<SafeDisplayExpense>([]);
 
+  private recomputeChartData() {
+    const chartData = this.createChartData(this.expenses(), 21);
+    this.updateChart(chartData);
+  }
+
   ngAfterViewInit(): void {
     this.expenseStore.fetchExpenses().subscribe();
     this.initializeChart();
+    this.recomputeChartData();
   }
 
   onAddExpense(): void {
@@ -133,33 +144,71 @@ export class ExpenseComponent implements AfterViewInit {
     }
   };
 
+  private sortExpenseByDate(a: Expense, b: Expense) {
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
+  }
+
   private initializeChart(): void {
     this.summaryChart = new Chart(
       (this.summaryChartCanvas as ElementRef<HTMLCanvasElement>).nativeElement,
       {
         type: 'line',
-        data: {
-          labels: Array.from(
-            { length: 21 },
-            (_, i) => new Date(2024, 11, 22 + i),
-          ).map((d) =>
-            new Date(d).toLocaleString('en-US', {
-              day: '2-digit',
-              month: 'short',
-            }),
-          ),
-          datasets: [
-            {
-              label: 'Your 3-week expenses',
-              data: [...Array(100).keys()].map(() => Math.random() * 10000),
-            },
-          ],
-        },
+        data: { labels: [], datasets: [] },
         options: {
           maintainAspectRatio: false,
         },
       },
     );
+  }
+
+  private updateChart(chartData: ChartData): void {
+    if (this.summaryChart) {
+      this.summaryChart.data = chartData;
+      this.summaryChart.update();
+    }
+  }
+
+  private createChartData(expenses: Expense[], duration: number): ChartData {
+    const filteredExpenses = this.filterExpensesBasedOnDate(duration, expenses);
+    const labels: string[] = [];
+    const data: number[] = [];
+
+    filteredExpenses.forEach((expense) => {
+      labels.push(
+        new Date(expense.date).toLocaleString('en-US', {
+          day: '2-digit',
+          month: 'short',
+        }),
+      );
+      data.push(expense.amount * expense.quantity);
+    });
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'Your 3-week Expenses',
+          data,
+        },
+      ],
+    };
+  }
+
+  private filterExpensesBasedOnDate(
+    duration: number,
+    expenses: Expense[],
+  ): Expense[] {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const daysAgo = new Date();
+    daysAgo.setDate(today.getDate() - duration);
+    daysAgo.setHours(0, 0, 0, 0);
+    const filteredExpenses = expenses.filter((expense) => {
+      const expenseDate = new Date(expense.date);
+      expenseDate.setHours(0, 0, 0, 0);
+      return expenseDate >= daysAgo && expenseDate <= today;
+    });
+    return filteredExpenses;
   }
 
   private formatExpenses(expenses: Expense[]): SafeDisplayExpense[] {
