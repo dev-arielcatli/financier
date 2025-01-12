@@ -22,7 +22,11 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
-import { Expense, NewExpense, SafeDisplayExpense } from './expense.model';
+import {
+  Expense,
+  NewExpense,
+  SafeDisplayExpense,
+} from '../../store/expense/expense.model';
 import { mockExpenses } from './mocks/expenses.mock';
 import { CommonModule } from '@angular/common';
 
@@ -31,10 +35,10 @@ import { ShortenPipe } from '../../shared/shortener.pipe';
 import { MatSortModule } from '@angular/material/sort';
 
 import { Chart } from 'chart.js/auto';
-import { ExpenseApiService } from './expense.api.service';
 
 import { toSignal } from '@angular/core/rxjs-interop';
-import { tap } from 'rxjs';
+import { ExpenseStoreFacadeService } from '../../store/expense/expense.store';
+import { RequestResult } from '@ngneat/elf-requests';
 
 @Component({
   selector: 'fn-expense',
@@ -55,8 +59,8 @@ import { tap } from 'rxjs';
   styleUrl: './expense.component.scss',
 })
 export class ExpenseComponent implements AfterViewInit {
-  // SERVICES
-  expenseApiService = inject(ExpenseApiService);
+  // STORE
+  expenseStore = inject(ExpenseStoreFacadeService);
 
   // DIALOGS
   expenseDialog = inject(MatDialog);
@@ -86,31 +90,30 @@ export class ExpenseComponent implements AfterViewInit {
     'date',
   ];
 
-  expenses = toSignal<Expense[]>(
-    this.expenseApiService.getExpenses().pipe(
-      tap((expenses) => {
-        if (!!expenses) {
-          const formattedExpenses = this.formatExpenses(expenses);
-          this.expenseDataSource = new MatTableDataSource<SafeDisplayExpense>(
-            formattedExpenses,
-          );
-        }
-      }),
-    ),
-  );
+  expenseEntities = toSignal<
+    RequestResult<any, Expense[]> & { data: Expense[] }
+  >(this.expenseStore.$expenses);
+
+  expenses = computed<SafeDisplayExpense[]>(() => {
+    const entities = this.expenseEntities();
+    if (entities?.isSuccess) {
+      return this.formatExpenses(entities.data || []);
+    }
+    return [];
+  });
+
+  expensesIsLoading = computed<boolean>(() => {
+    return !!this.expenseEntities()?.isLoading;
+  });
+
+  constructor() {
+    effect(this.subscribeTableToExpenseChange);
+  }
 
   expenseDataSource = new MatTableDataSource<SafeDisplayExpense>([]);
 
   ngAfterViewInit(): void {
-    if (!!this.expenses()) {
-      const formattedExpenses = this.formatExpenses(
-        this.expenses() as Expense[],
-      );
-      this.expenseDataSource = new MatTableDataSource<SafeDisplayExpense>(
-        formattedExpenses,
-      );
-    }
-    this.expenseDataSource.paginator = this.expenseTablePaginator;
+    this.expenseStore.fetchExpenses().subscribe();
     this.initializeChart();
   }
 
@@ -118,6 +121,15 @@ export class ExpenseComponent implements AfterViewInit {
     this.expenseDialogRef = this.expenseDialog.open(ExpenseFormComponent, {});
     this.subscribeToExpenseDialogClose();
   }
+
+  private subscribeTableToExpenseChange = () => {
+    this.expenseDataSource = new MatTableDataSource<SafeDisplayExpense>(
+      this.expenses(),
+    );
+    if (this.expenseTablePaginator) {
+      this.expenseDataSource.paginator = this.expenseTablePaginator;
+    }
+  };
 
   private initializeChart(): void {
     this.summaryChart = new Chart(
@@ -190,9 +202,9 @@ export class ExpenseComponent implements AfterViewInit {
       if (expense.id) {
         console.log('Update expense', expense);
       } else {
-        this.expenseApiService
-          .addExpense(expense as NewExpense, 'default')
-          .subscribe();
+        // this.expenseApiService
+        //   .addExpense(expense as NewExpense, 'default')
+        //   .subscribe();
       }
     }
   }

@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { SafeDisplayExpense } from '../expense.model';
 import { MatIconModule } from '@angular/material/icon';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
@@ -18,6 +17,7 @@ import {
   MatChipsModule,
 } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
+import { SafeDisplayExpense } from '../../../store/expense/expense.model';
 
 @Component({
   selector: 'fn-expense-form',

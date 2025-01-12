@@ -1,4 +1,4 @@
-import { Expense } from '../expense.model';
+import { Expense } from '../../../store/expense/expense.model';
 
 export const mockExpenses: Expense[] = [
   {

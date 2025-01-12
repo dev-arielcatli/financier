@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Expense, NewExpense } from './expense.model';
+import { Expense, NewExpense } from '../../store/expense/expense.model';
 import { EndpointService } from '../../shared/service/endpoint.service';
 
 @Injectable({
@@ -10,7 +10,6 @@ import { EndpointService } from '../../shared/service/endpoint.service';
 export class ExpenseApiService {
   httpClient = inject(HttpClient);
   endpointService = inject(EndpointService);
-  constructor() {}
 
   getExpenses(userId: string = 'default'): Observable<Expense[]> {
     return this.httpClient.get<Expense[]>('/v1/expense', {
